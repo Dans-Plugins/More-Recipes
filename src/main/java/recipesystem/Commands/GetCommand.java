@@ -46,7 +46,7 @@ public class GetCommand {
 
                 }
                 else {
-                    player.sendMessage(ChatColor.RED + "Usage: /morerecipes get (itemName)");
+                    player.sendMessage(ChatColor.RED + "Usage: /morerecipes get (itemName) (amount)");
                 }
 
             }
