@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import recipesystem.Main;
@@ -13,22 +12,22 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Salt {
+public class Saddle {
 
     Main main = null;
 
-    public Salt(Main plugin) {
+    public Saddle(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.SUGAR, amount);
+        ItemStack item = new ItemStack(Material.SADDLE, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Salt");
+        meta.setDisplayName(ChatColor.WHITE + "Crafted_Saddle");
         List<String> lore = new ArrayList<String>();
         lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Great for seasoning.");
+        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to ride certain animals.");
 
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -37,10 +36,11 @@ public class Salt {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "salt");
+        NamespacedKey key = new NamespacedKey(main, "crafted_saddle");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("DDD", "D0D", "DDD");
-        recipe.setIngredient('D', Material.DIORITE);
+        recipe.shape("LLL", "L0L", "I0I");
+        recipe.setIngredient('L', Material.LEATHER);
+        recipe.setIngredient('I', Material.IRON_BLOCK);
         Bukkit.addRecipe(recipe);
     }
 
