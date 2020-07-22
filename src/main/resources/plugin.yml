@@ -1,0 +1,4 @@
+name: More Recipes
+version: ${project.version}
+main: recipesystem.Main
+api-version: 1.16.1
