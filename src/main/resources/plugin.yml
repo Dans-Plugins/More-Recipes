@@ -1,4 +1,9 @@
-name: More Recipes
-version: ${project.version}
+name: More-Recipes
+version: "0.3"
+author: DanTheTechMan
 main: recipesystem.Main
-api-version: 1.16.1
+api-version: "1.13"
+
+commands:
+  morerecipes:
+  mr:
