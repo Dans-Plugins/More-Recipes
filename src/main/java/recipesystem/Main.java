@@ -10,7 +10,7 @@ import recipesystem.Subsystems.RecipeSubsystem;
 public final class Main extends JavaPlugin {
 
     // version
-    public static String version = "v0.5";
+    public static String version = "v0.6";
 
     // subsystems
     public ItemStackSubsystem itemstacks = new ItemStackSubsystem(this);
