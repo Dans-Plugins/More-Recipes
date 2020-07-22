@@ -15,7 +15,8 @@ public class ItemStackSubsystem {
     public ItemStack getItemStack(String itemName, int amount) {
 
         if (itemName.equalsIgnoreCase("Salt")) {
-            return Salt.getItemStack(amount);
+            Salt salt = new Salt(main);
+            return salt.getItemStack(amount);
         }
         return null;
     }
