@@ -8,6 +8,9 @@ import recipesystem.Subsystems.ItemStackSubsystem;
 
 public final class Main extends JavaPlugin {
 
+    // version
+    public static String version = "v0.5";
+
     // subsystems
     public ItemStackSubsystem itemstacks = new ItemStackSubsystem(this);
 

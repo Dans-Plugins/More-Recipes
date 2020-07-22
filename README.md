@@ -7,5 +7,7 @@ A plugin to extend the recipes available in minecraft.
 
 # Versions
 -  0.1 Initial Build
--  0.2 'ItemStackSubsystem' update
+-  0.2 'ItemStack Subsystem' update
 -  0.3 'Salt' update
+-  0.4 'Command Subsystem' update
+-  0.5 'Get Command' update
