@@ -1,11 +1,11 @@
 package recipesystem.Subsystems;
 
 import org.bukkit.inventory.ItemStack;
-import recipesystem.ItemStacks.Vanilla.GrassBlock;
-import recipesystem.ItemStacks.Vanilla.NameTag;
-import recipesystem.ItemStacks.Vanilla.Saddle;
+import recipesystem.ItemStacks.Uncraftable.GrassBlock;
+import recipesystem.ItemStacks.Uncraftable.NameTag;
+import recipesystem.ItemStacks.Uncraftable.Saddle;
 import recipesystem.ItemStacks.Custom.Salt;
-import recipesystem.ItemStacks.Vanilla.TotemOfUndying;
+import recipesystem.ItemStacks.Uncraftable.TotemOfUndying;
 import recipesystem.Main;
 
 public class ItemStackSubsystem {

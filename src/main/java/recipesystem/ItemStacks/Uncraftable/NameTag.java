@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Vanilla;
+package recipesystem.ItemStacks.Uncraftable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,22 +12,22 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GrassBlock {
+public class NameTag {
 
     Main main = null;
 
-    public GrassBlock(Main plugin) {
+    public NameTag(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.GRASS_BLOCK, amount);
+        ItemStack item = new ItemStack(Material.NAME_TAG, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Grass Block");
+        meta.setDisplayName(ChatColor.WHITE + "Name Tag");
         List<String> lore = new ArrayList<String>();
         lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Dirt with life on top.");
+        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to give names to creatures.");
 
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -36,11 +36,11 @@ public class GrassBlock {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "more_recipes_grass_block");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_name_tag");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("000", "0G0", "0D0");
-        recipe.setIngredient('G', Material.GRASS);
-        recipe.setIngredient('D', Material.DIRT);
+        recipe.shape("PP0", "PP0", "00S");
+        recipe.setIngredient('P', Material.PAPER);
+        recipe.setIngredient('S', Material.STRING);
         Bukkit.addRecipe(recipe);
     }
 

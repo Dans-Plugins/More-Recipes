@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Vanilla;
+package recipesystem.ItemStacks.Uncraftable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,22 +12,22 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TotemOfUndying {
+public class GrassBlock {
 
     Main main = null;
 
-    public TotemOfUndying(Main plugin) {
+    public GrassBlock(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.TOTEM_OF_UNDYING, amount);
+        ItemStack item = new ItemStack(Material.GRASS_BLOCK, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Totem of Undying");
+        meta.setDisplayName(ChatColor.WHITE + "Grass Block");
         List<String> lore = new ArrayList<String>();
         lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used for a second chance at life.");
+        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Dirt with life on top.");
 
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -36,12 +36,11 @@ public class TotemOfUndying {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "more_recipes_totem_of_undying");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_grass_block");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("0D0", "BBB", "EBE");
-        recipe.setIngredient('D', Material.DIAMOND);
-        recipe.setIngredient('B', Material.DIAMOND_BLOCK);
-        recipe.setIngredient('E', Material.EMERALD);
+        recipe.shape("000", "0G0", "0D0");
+        recipe.setIngredient('G', Material.GRASS);
+        recipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(recipe);
     }
 

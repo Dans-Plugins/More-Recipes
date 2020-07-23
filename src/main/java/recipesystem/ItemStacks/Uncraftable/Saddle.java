@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Vanilla;
+package recipesystem.ItemStacks.Uncraftable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

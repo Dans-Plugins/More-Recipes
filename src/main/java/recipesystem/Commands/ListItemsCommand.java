@@ -27,7 +27,7 @@ public class ListItemsCommand {
                 // custom
                 player.sendMessage(ChatColor.AQUA + "Salt");
 
-                // vanilla
+                // uncraftable
                 player.sendMessage(ChatColor.AQUA + "GrassBlock");
                 player.sendMessage(ChatColor.AQUA + "NameTag");
                 player.sendMessage(ChatColor.AQUA + "TotemOfUndying");
