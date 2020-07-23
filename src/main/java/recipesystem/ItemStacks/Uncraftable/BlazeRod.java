@@ -12,6 +12,8 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.BLAZE_ROD;
+
 public class BlazeRod {
 
     Main main = null;
@@ -21,18 +23,7 @@ public class BlazeRod {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.BLAZE_ROD, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Blaze Rod");
-        List<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "A rod of blazing fire.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, BLAZE_ROD, "Blaze Rod", "A rod of blazing fire.");
     }
 
     public void registerRecipe() {

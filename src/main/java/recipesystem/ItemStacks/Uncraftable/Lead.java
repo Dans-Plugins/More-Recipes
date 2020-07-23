@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.GRASS_BLOCK;
+import static org.bukkit.Material.LEAD;
+
 public class Lead {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class Lead {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.LEAD, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Lead");
-        List<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to lead animals or keep them in one place.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, LEAD, "Lead", "Used to lead animals or keep them in one place.");
     }
 
     public void registerRecipe() {

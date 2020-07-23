@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.SADDLE;
+import static org.bukkit.Material.STRING;
+
 public class StringItem {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class StringItem {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.STRING, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "String");
-        List<String> lore = new ArrayList<>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to craft bows, fishing poles and wool.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, STRING, "String", "Used to craft bows, fishing poles and wool.");
     }
 
     public void registerRecipe() {

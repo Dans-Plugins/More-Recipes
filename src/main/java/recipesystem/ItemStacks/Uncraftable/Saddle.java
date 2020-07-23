@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.NAME_TAG;
+import static org.bukkit.Material.SADDLE;
+
 public class Saddle {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class Saddle {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.SADDLE, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Saddle");
-        List<String> lore = new ArrayList<String>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to ride certain animals.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, SADDLE, "Saddle", "Used to ride certain animals.");
     }
 
     public void registerRecipe() {

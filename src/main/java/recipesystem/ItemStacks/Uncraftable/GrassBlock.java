@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.BLAZE_ROD;
+import static org.bukkit.Material.GRASS_BLOCK;
+
 public class GrassBlock {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class GrassBlock {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.GRASS_BLOCK, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Grass Block");
-        List<String> lore = new ArrayList<String>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Dirt with life on top.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
     }
 
     public void registerRecipe() {

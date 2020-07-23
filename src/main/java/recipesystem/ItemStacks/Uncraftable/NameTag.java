@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.LEAD;
+import static org.bukkit.Material.NAME_TAG;
+
 public class NameTag {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class NameTag {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.NAME_TAG, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Name Tag");
-        List<String> lore = new ArrayList<String>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to give names to creatures.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, NAME_TAG, "Name Tag", "Used to give names to creatures.");
     }
 
     public void registerRecipe() {

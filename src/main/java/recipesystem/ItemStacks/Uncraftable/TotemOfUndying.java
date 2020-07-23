@@ -12,6 +12,9 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.STRING;
+import static org.bukkit.Material.TOTEM_OF_UNDYING;
+
 public class TotemOfUndying {
 
     Main main = null;
@@ -21,18 +24,7 @@ public class TotemOfUndying {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.TOTEM_OF_UNDYING, amount);
-        ItemMeta meta = item.getItemMeta();
-
-        meta.setDisplayName(ChatColor.WHITE + "Totem of Undying");
-        List<String> lore = new ArrayList<String>();
-        lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used for a second chance at life.");
-
-        meta.setLore(lore);
-        item.setItemMeta(meta);
-
-        return item;
+        return main.itemstacks.createItemStack(amount, TOTEM_OF_UNDYING, "Totem of Undying", "Used for a second chance at life.");
     }
 
     public void registerRecipe() {
