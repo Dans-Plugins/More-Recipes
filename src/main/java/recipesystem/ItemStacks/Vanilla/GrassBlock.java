@@ -24,7 +24,7 @@ public class GrassBlock {
         ItemStack item = new ItemStack(Material.GRASS_BLOCK, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Grass_Block");
+        meta.setDisplayName(ChatColor.WHITE + "Grass Block");
         List<String> lore = new ArrayList<String>();
         lore.add("");
         lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Dirt with life on top.");

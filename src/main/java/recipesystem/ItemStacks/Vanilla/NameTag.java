@@ -24,7 +24,7 @@ public class NameTag {
         ItemStack item = new ItemStack(Material.NAME_TAG, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Name_Tag");
+        meta.setDisplayName(ChatColor.WHITE + "Name Tag");
         List<String> lore = new ArrayList<String>();
         lore.add("");
         lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to give names to creatures.");
