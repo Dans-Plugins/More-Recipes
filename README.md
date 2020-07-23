@@ -19,3 +19,4 @@ A plugin to extend the recipes available in minecraft.
 - 1.1 'List Items Command' update
 - 1.2 'String' update
 - 1.3 'Lead' update
+- 1.4 'Blaze Rod' update
