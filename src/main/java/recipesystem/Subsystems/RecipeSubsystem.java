@@ -3,6 +3,7 @@ package recipesystem.Subsystems;
 import recipesystem.ItemStacks.Vanilla.Nametag;
 import recipesystem.ItemStacks.Vanilla.Saddle;
 import recipesystem.ItemStacks.Custom.Salt;
+import recipesystem.ItemStacks.Vanilla.TotemOfUndying;
 import recipesystem.Main;
 
 public class RecipeSubsystem {
@@ -25,6 +26,9 @@ public class RecipeSubsystem {
 
         Nametag nametag = new Nametag(main);
         nametag.registerRecipe();
+
+        TotemOfUndying totemOfUndying = new TotemOfUndying(main);
+        totemOfUndying.registerRecipe();
     }
 
 }

@@ -12,22 +12,22 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nametag {
+public class TotemOfUndying {
 
     Main main = null;
 
-    public Nametag(Main plugin) {
+    public TotemOfUndying(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.NAME_TAG, amount);
+        ItemStack item = new ItemStack(Material.TOTEM_OF_UNDYING, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Nametag");
+        meta.setDisplayName(ChatColor.WHITE + "Totem of Undying");
         List<String> lore = new ArrayList<String>();
         lore.add("");
-        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to give names to creatures.");
+        lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used for a second chance at life.");
 
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -36,11 +36,12 @@ public class Nametag {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "more_recipes_name_tag");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_totem_of_undying");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("PP0", "PP0", "00S");
-        recipe.setIngredient('P', Material.PAPER);
-        recipe.setIngredient('S', Material.STRING);
+        recipe.shape("0D0", "BBB", "EBE");
+        recipe.setIngredient('D', Material.DIAMOND);
+        recipe.setIngredient('B', Material.DIAMOND_BLOCK);
+        recipe.setIngredient('E', Material.EMERALD);
         Bukkit.addRecipe(recipe);
     }
 

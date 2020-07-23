@@ -4,6 +4,7 @@ import org.bukkit.inventory.ItemStack;
 import recipesystem.ItemStacks.Vanilla.Nametag;
 import recipesystem.ItemStacks.Vanilla.Saddle;
 import recipesystem.ItemStacks.Custom.Salt;
+import recipesystem.ItemStacks.Vanilla.TotemOfUndying;
 import recipesystem.Main;
 
 public class ItemStackSubsystem {
@@ -29,6 +30,11 @@ public class ItemStackSubsystem {
         if (itemName.equalsIgnoreCase("Nametag")) {
             Nametag nametag = new Nametag(main);
             return nametag.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("TotemOfUndying")) {
+            TotemOfUndying totemOfUndying = new TotemOfUndying(main);
+            return totemOfUndying.getItemStack(amount);
         }
 
         return null;
