@@ -1,10 +1,7 @@
 package recipesystem.Subsystems;
 
-import recipesystem.ItemStacks.Uncraftable.GrassBlock;
-import recipesystem.ItemStacks.Uncraftable.NameTag;
-import recipesystem.ItemStacks.Uncraftable.Saddle;
+import recipesystem.ItemStacks.Uncraftable.*;
 import recipesystem.ItemStacks.Custom.Salt;
-import recipesystem.ItemStacks.Uncraftable.TotemOfUndying;
 import recipesystem.Main;
 
 public class RecipeSubsystem {
@@ -33,6 +30,9 @@ public class RecipeSubsystem {
 
         GrassBlock grassBlock = new GrassBlock(main);
         grassBlock.registerRecipe();
+
+        StringItem string = new StringItem(main);
+        string.registerRecipe();
     }
 
 }

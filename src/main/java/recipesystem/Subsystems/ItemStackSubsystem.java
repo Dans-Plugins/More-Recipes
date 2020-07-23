@@ -1,11 +1,8 @@
 package recipesystem.Subsystems;
 
 import org.bukkit.inventory.ItemStack;
-import recipesystem.ItemStacks.Uncraftable.GrassBlock;
-import recipesystem.ItemStacks.Uncraftable.NameTag;
-import recipesystem.ItemStacks.Uncraftable.Saddle;
+import recipesystem.ItemStacks.Uncraftable.*;
 import recipesystem.ItemStacks.Custom.Salt;
-import recipesystem.ItemStacks.Uncraftable.TotemOfUndying;
 import recipesystem.Main;
 
 public class ItemStackSubsystem {
@@ -41,6 +38,11 @@ public class ItemStackSubsystem {
         if (itemName.equalsIgnoreCase("GrassBlock")) {
             GrassBlock grassBlock = new GrassBlock(main);
             return grassBlock.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("String")) {
+            StringItem string = new StringItem(main);
+            return string.getItemStack(amount);
         }
 
         return null;
