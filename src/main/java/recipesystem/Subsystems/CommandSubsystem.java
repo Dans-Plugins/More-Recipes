@@ -20,16 +20,19 @@ public class CommandSubsystem {
             if (args.length == 0) {
                 sender.sendMessage(ChatColor.AQUA + " == More Recipes " + main.version + " == ");
                 sender.sendMessage(ChatColor.AQUA + "Author: DanTheTechMan");
+                return true;
             }
 
             if (args[0].equalsIgnoreCase("get")) {
                 GetCommand command = new GetCommand(main);
                 command.getItem(sender, args);
+                return true;
             }
 
             if (args[0].equalsIgnoreCase("listitems")) {
                 ListItemsCommand command = new ListItemsCommand(main);
                 command.showListToPlayer(sender);
+                return true;
             }
 
         }
