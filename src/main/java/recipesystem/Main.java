@@ -10,7 +10,7 @@ import recipesystem.Subsystems.RecipeSubsystem;
 public final class Main extends JavaPlugin {
 
     // version
-    public static String version = "v0.7";
+    public static String version = "v0.8";
 
     // subsystems
     public ItemStackSubsystem itemstacks = new ItemStackSubsystem(this);
@@ -18,9 +18,7 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         recipes.registerRecipes();
-
     }
 
     @Override

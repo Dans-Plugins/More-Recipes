@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks;
+package recipesystem.ItemStacks.Vanilla;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -24,7 +24,7 @@ public class Saddle {
         ItemStack item = new ItemStack(Material.SADDLE, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Crafted_Saddle");
+        meta.setDisplayName(ChatColor.WHITE + "Saddle");
         List<String> lore = new ArrayList<String>();
         lore.add("");
         lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to ride certain animals.");
@@ -36,7 +36,7 @@ public class Saddle {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "crafted_saddle");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_saddle");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("LLL", "L0L", "I0I");
         recipe.setIngredient('L', Material.LEATHER);

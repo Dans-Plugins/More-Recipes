@@ -1,8 +1,9 @@
 package recipesystem.Subsystems;
 
 import org.bukkit.inventory.ItemStack;
-import recipesystem.ItemStacks.Saddle;
-import recipesystem.ItemStacks.Salt;
+import recipesystem.ItemStacks.Vanilla.Nametag;
+import recipesystem.ItemStacks.Vanilla.Saddle;
+import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.Main;
 
 public class ItemStackSubsystem {
@@ -23,6 +24,11 @@ public class ItemStackSubsystem {
         if (itemName.equalsIgnoreCase("Saddle")) {
             Saddle saddle = new Saddle(main);
             return saddle.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("Nametag")) {
+            Nametag nametag = new Nametag(main);
+            return nametag.getItemStack(amount);
         }
 
         return null;

@@ -1,7 +1,8 @@
 package recipesystem.Subsystems;
 
-import recipesystem.ItemStacks.Saddle;
-import recipesystem.ItemStacks.Salt;
+import recipesystem.ItemStacks.Vanilla.Nametag;
+import recipesystem.ItemStacks.Vanilla.Saddle;
+import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.Main;
 
 public class RecipeSubsystem {
@@ -13,11 +14,17 @@ public class RecipeSubsystem {
     }
 
     public void registerRecipes() {
+
+        // custom items
         Salt salt = new Salt(main);
         salt.registerRecipe();
 
+        // vanilla items
         Saddle saddle = new Saddle(main);
         saddle.registerRecipe();
+
+        Nametag nametag = new Nametag(main);
+        nametag.registerRecipe();
     }
 
 }

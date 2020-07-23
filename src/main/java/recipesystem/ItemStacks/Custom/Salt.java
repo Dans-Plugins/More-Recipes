@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks;
+package recipesystem.ItemStacks.Custom;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -37,7 +37,7 @@ public class Salt {
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "salt");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_salt");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("DDD", "D0D", "DDD");
         recipe.setIngredient('D', Material.DIORITE);
