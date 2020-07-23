@@ -29,9 +29,11 @@ public class ListItemsCommand {
 
                 // uncraftable
                 player.sendMessage(ChatColor.AQUA + "GrassBlock");
+                player.sendMessage(ChatColor.AQUA + "Lead");
                 player.sendMessage(ChatColor.AQUA + "NameTag");
-                player.sendMessage(ChatColor.AQUA + "TotemOfUndying");
                 player.sendMessage(ChatColor.AQUA + "Saddle");
+                player.sendMessage(ChatColor.AQUA + "String");
+                player.sendMessage(ChatColor.AQUA + "TotemOfUndying");
 
             }
             else {

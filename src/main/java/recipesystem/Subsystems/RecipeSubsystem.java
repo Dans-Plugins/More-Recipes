@@ -33,6 +33,9 @@ public class RecipeSubsystem {
 
         StringItem string = new StringItem(main);
         string.registerRecipe();
+
+        Lead lead = new Lead(main);
+        lead.registerRecipe();
     }
 
 }

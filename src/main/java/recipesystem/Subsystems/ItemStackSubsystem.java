@@ -45,6 +45,11 @@ public class ItemStackSubsystem {
             return string.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("Lead")) {
+            Lead lead = new Lead(main);
+            return lead.getItemStack(amount);
+        }
+
         return null;
     }
 
