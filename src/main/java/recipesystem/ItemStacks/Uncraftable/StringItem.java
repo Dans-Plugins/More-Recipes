@@ -21,7 +21,7 @@ public class StringItem {
     }
 
     public ItemStack getItemStack(int amount) {
-        ItemStack item = new ItemStack(Material.SADDLE, amount);
+        ItemStack item = new ItemStack(Material.STRING, amount);
         ItemMeta meta = item.getItemMeta();
 
         meta.setDisplayName(ChatColor.WHITE + "String");
