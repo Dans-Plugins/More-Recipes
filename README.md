@@ -17,6 +17,4 @@ A plugin to extend the recipes available in minecraft.
 - 0.9 'Totem Of Undying' update
 - 1.0 'Grass Block' update
 - 1.1 'List Items Command' update
-- 1.2 'String' update
-- 1.3 'Lead' update
-- 1.4 'Blaze Rod' update
+- 1.2 'String, Lead, Blaze Rod' update
