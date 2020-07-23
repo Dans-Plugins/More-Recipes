@@ -40,7 +40,7 @@ public class Lead {
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("SS0", "SI0", "00S");
         recipe.setIngredient('S', Material.STRING);
-        recipe.setIngredient('I', Material.LEAD);
+        recipe.setIngredient('I', Material.IRON_BLOCK);
         Bukkit.addRecipe(recipe);
     }
 
