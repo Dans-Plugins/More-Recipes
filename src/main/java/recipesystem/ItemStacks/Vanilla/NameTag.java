@@ -12,11 +12,11 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Nametag {
+public class NameTag {
 
     Main main = null;
 
-    public Nametag(Main plugin) {
+    public NameTag(Main plugin) {
         main = plugin;
     }
 
@@ -24,7 +24,7 @@ public class Nametag {
         ItemStack item = new ItemStack(Material.NAME_TAG, amount);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(ChatColor.WHITE + "Nametag");
+        meta.setDisplayName(ChatColor.WHITE + "Name_Tag");
         List<String> lore = new ArrayList<String>();
         lore.add("");
         lore.add(ChatColor.WHITE + "" + ChatColor.ITALIC + "Used to give names to creatures.");

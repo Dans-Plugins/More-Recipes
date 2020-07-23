@@ -1,7 +1,8 @@
 package recipesystem.Subsystems;
 
 import org.bukkit.inventory.ItemStack;
-import recipesystem.ItemStacks.Vanilla.Nametag;
+import recipesystem.ItemStacks.Vanilla.GrassBlock;
+import recipesystem.ItemStacks.Vanilla.NameTag;
 import recipesystem.ItemStacks.Vanilla.Saddle;
 import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.ItemStacks.Vanilla.TotemOfUndying;
@@ -27,14 +28,19 @@ public class ItemStackSubsystem {
             return saddle.getItemStack(amount);
         }
 
-        if (itemName.equalsIgnoreCase("Nametag")) {
-            Nametag nametag = new Nametag(main);
+        if (itemName.equalsIgnoreCase("NameTag")) {
+            NameTag nametag = new NameTag(main);
             return nametag.getItemStack(amount);
         }
 
         if (itemName.equalsIgnoreCase("TotemOfUndying")) {
             TotemOfUndying totemOfUndying = new TotemOfUndying(main);
             return totemOfUndying.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("GrassBlock")) {
+            GrassBlock grassBlock = new GrassBlock(main);
+            return grassBlock.getItemStack(amount);
         }
 
         return null;

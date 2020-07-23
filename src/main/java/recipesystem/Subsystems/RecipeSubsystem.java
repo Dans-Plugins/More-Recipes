@@ -1,6 +1,7 @@
 package recipesystem.Subsystems;
 
-import recipesystem.ItemStacks.Vanilla.Nametag;
+import recipesystem.ItemStacks.Vanilla.GrassBlock;
+import recipesystem.ItemStacks.Vanilla.NameTag;
 import recipesystem.ItemStacks.Vanilla.Saddle;
 import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.ItemStacks.Vanilla.TotemOfUndying;
@@ -24,11 +25,14 @@ public class RecipeSubsystem {
         Saddle saddle = new Saddle(main);
         saddle.registerRecipe();
 
-        Nametag nametag = new Nametag(main);
+        NameTag nametag = new NameTag(main);
         nametag.registerRecipe();
 
         TotemOfUndying totemOfUndying = new TotemOfUndying(main);
         totemOfUndying.registerRecipe();
+
+        GrassBlock grassBlock = new GrassBlock(main);
+        grassBlock.registerRecipe();
     }
 
 }

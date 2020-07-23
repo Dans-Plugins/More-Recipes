@@ -13,5 +13,6 @@ A plugin to extend the recipes available in minecraft.
 -  0.5 'Get Command' update
 -  0.6 'Recipe Subsystem' update
 -  0.7 'Saddle' update
--  0.8 'Nametag' update
+-  0.8 'Name Tag' update
 -  0.9 'Totem Of Undying' update
+-  1.0 'Grass Block' update
