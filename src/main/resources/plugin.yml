@@ -1,5 +1,5 @@
 name: More-Recipes
-version: "1.1"
+version: "1.1.1"
 author: DanTheTechMan
 main: recipesystem.Main
 api-version: "1.13"
