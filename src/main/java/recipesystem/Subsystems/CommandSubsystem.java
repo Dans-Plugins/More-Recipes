@@ -18,7 +18,7 @@ public class CommandSubsystem {
         if (label.equalsIgnoreCase("morerecipes") || label.equalsIgnoreCase("mr")) {
 
             if (args.length == 0) {
-                sender.sendMessage(ChatColor.AQUA + "== More Recipes " + main.version + " ==");
+                sender.sendMessage(ChatColor.AQUA + " == More Recipes " + main.version + " == ");
                 sender.sendMessage(ChatColor.AQUA + "Author: DanTheTechMan");
             }
 
