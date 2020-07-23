@@ -3,6 +3,7 @@ package recipesystem.Subsystems;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import recipesystem.Commands.GetCommand;
+import recipesystem.Commands.ListItemsCommand;
 import recipesystem.Main;
 
 public class CommandSubsystem {
@@ -22,10 +23,13 @@ public class CommandSubsystem {
             }
 
             if (args[0].equalsIgnoreCase("get")) {
-
                 GetCommand command = new GetCommand(main);
                 command.getItem(sender, args);
+            }
 
+            if (args[0].equalsIgnoreCase("listitems")) {
+                ListItemsCommand command = new ListItemsCommand(main);
+                command.showListToPlayer(sender);
             }
 
         }
