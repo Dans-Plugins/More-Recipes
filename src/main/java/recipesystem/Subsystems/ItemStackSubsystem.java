@@ -50,6 +50,11 @@ public class ItemStackSubsystem {
             return lead.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("BlazeRod")) {
+            BlazeRod blazeRod = new BlazeRod(main);
+            return blazeRod.getItemStack(amount);
+        }
+
         return null;
     }
 

@@ -36,6 +36,9 @@ public class RecipeSubsystem {
 
         Lead lead = new Lead(main);
         lead.registerRecipe();
+
+        BlazeRod blazeRod = new BlazeRod(main);
+        blazeRod.registerRecipe();
     }
 
 }

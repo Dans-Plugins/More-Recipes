@@ -28,6 +28,7 @@ public class ListItemsCommand {
                 player.sendMessage(ChatColor.AQUA + "Salt");
 
                 // uncraftable
+                player.sendMessage(ChatColor.AQUA + "BlazeRod");
                 player.sendMessage(ChatColor.AQUA + "GrassBlock");
                 player.sendMessage(ChatColor.AQUA + "Lead");
                 player.sendMessage(ChatColor.AQUA + "NameTag");
