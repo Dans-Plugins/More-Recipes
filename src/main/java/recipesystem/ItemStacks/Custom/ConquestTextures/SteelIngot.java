@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Custom;
+package recipesystem.ItemStacks.Custom.ConquestTextures;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

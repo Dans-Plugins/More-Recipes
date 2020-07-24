@@ -1,8 +1,8 @@
 package recipesystem.Subsystems;
 
-import recipesystem.ItemStacks.Custom.SteelIngot;
+import recipesystem.ItemStacks.Custom.ConquestTextures.SteelIngot;
 import recipesystem.ItemStacks.Uncraftable.*;
-import recipesystem.ItemStacks.Custom.Salt;
+import recipesystem.ItemStacks.Custom.VanillaTextures.Salt;
 import recipesystem.Main;
 
 public class RecipeSubsystem {

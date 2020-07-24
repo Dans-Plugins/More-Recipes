@@ -2,13 +2,11 @@ package recipesystem.Subsystems;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import recipesystem.ItemStacks.Custom.SteelIngot;
+import recipesystem.ItemStacks.Custom.ConquestTextures.SteelIngot;
 import recipesystem.ItemStacks.Uncraftable.*;
-import recipesystem.ItemStacks.Custom.Salt;
+import recipesystem.ItemStacks.Custom.VanillaTextures.Salt;
 import recipesystem.Main;
 
 import java.util.ArrayList;
