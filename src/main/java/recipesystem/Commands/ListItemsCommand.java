@@ -34,7 +34,10 @@ public class ListItemsCommand {
                 player.sendMessage(ChatColor.AQUA + "ChainmailChestplate");
                 player.sendMessage(ChatColor.AQUA + "ChainmailHelmet");
                 player.sendMessage(ChatColor.AQUA + "ChainmailLeggings");
+                player.sendMessage(ChatColor.AQUA + "DiamondHorseArmor");
+                player.sendMessage(ChatColor.AQUA + "GoldenHorseArmor");
                 player.sendMessage(ChatColor.AQUA + "GrassBlock");
+                player.sendMessage(ChatColor.AQUA + "IronHorseArmor");
                 player.sendMessage(ChatColor.AQUA + "Lead");
                 player.sendMessage(ChatColor.AQUA + "NameTag");
                 player.sendMessage(ChatColor.AQUA + "Saddle");

@@ -102,6 +102,21 @@ public class ItemStackSubsystem {
             return chainmailBoots.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("IronHorseArmor")) {
+            IronHorseArmor ironHorseArmor = new IronHorseArmor(main);
+            return ironHorseArmor.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("GoldenHorseArmor")) {
+            GoldenHorseArmor goldenHorseArmor = new GoldenHorseArmor(main);
+            return goldenHorseArmor.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("DiamondHorseArmor")) {
+            DiamondHorseArmor diamondHorseArmor = new DiamondHorseArmor(main);
+            return diamondHorseArmor.getItemStack(amount);
+        }
+
         return null;
     }
 
