@@ -39,6 +39,9 @@ public class RecipeSubsystem {
 
         BlazeRod blazeRod = new BlazeRod(main);
         blazeRod.registerRecipe();
+
+        ChainmailHelmet chainmailHelmet = new ChainmailHelmet(main);
+        chainmailHelmet.registerRecipe();
     }
 
 }

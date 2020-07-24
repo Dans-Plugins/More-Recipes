@@ -76,6 +76,11 @@ public class ItemStackSubsystem {
             return blazeRod.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("ChainmailHelmet")) {
+            ChainmailHelmet chainmailHelmet = new ChainmailHelmet(main);
+            return chainmailHelmet.getItemStack(amount);
+        }
+
         return null;
     }
 
