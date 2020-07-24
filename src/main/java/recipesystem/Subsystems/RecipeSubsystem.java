@@ -55,6 +55,15 @@ public class RecipeSubsystem {
 
         ChainmailBoots chainmailBoots = new ChainmailBoots(main);
         chainmailBoots.registerRecipe();
+
+        IronHorseArmor ironHorseArmor = new IronHorseArmor(main);
+        ironHorseArmor.registerRecipe();
+
+        GoldenHorseArmor goldenHorseArmor = new GoldenHorseArmor(main);
+        goldenHorseArmor.registerRecipe();
+
+        DiamondHorseArmor diamondHorseArmor = new DiamondHorseArmor(main);
+        diamondHorseArmor.registerRecipe();
     }
 
 }
