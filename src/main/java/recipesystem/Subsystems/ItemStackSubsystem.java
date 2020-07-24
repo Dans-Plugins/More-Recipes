@@ -2,6 +2,8 @@ package recipesystem.Subsystems;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import recipesystem.ItemStacks.Uncraftable.*;
@@ -74,6 +76,26 @@ public class ItemStackSubsystem {
         if (itemName.equalsIgnoreCase("BlazeRod")) {
             BlazeRod blazeRod = new BlazeRod(main);
             return blazeRod.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("ChainmailHelmet")) {
+            ChainmailHelmet chainmailHelmet = new ChainmailHelmet(main);
+            return chainmailHelmet.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("ChainmailChestplate")) {
+            ChainmailChestplate chainmailChestplate = new ChainmailChestplate(main);
+            return chainmailChestplate.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("ChainmailLeggings")) {
+            ChainmailLeggings chainmailLeggings = new ChainmailLeggings(main);
+            return chainmailLeggings.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("ChainmailBoots")) {
+            ChainmailBoots chainmailBoots = new ChainmailBoots(main);
+            return chainmailBoots.getItemStack(amount);
         }
 
         return null;
