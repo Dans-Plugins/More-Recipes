@@ -18,4 +18,4 @@ A plugin to extend the recipes available in minecraft.
 - 1.0 'Grass Block' update
 - 1.1 'List Items Command' update
 - 1.2 'String, Lead, Blaze Rod' update
-- 1.3 'Chainmail Armor & Steel Ingots' update
+- 1.3 'Chainmail Armor & Steel Ingots' update"# Conquest-Recipes" 
