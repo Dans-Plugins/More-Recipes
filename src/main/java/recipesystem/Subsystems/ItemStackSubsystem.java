@@ -6,6 +6,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import recipesystem.ItemStacks.Custom.SteelIngot;
 import recipesystem.ItemStacks.Uncraftable.*;
 import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.Main;
@@ -41,6 +42,11 @@ public class ItemStackSubsystem {
         if (itemName.equalsIgnoreCase("Salt")) {
             Salt salt = new Salt(main);
             return salt.getItemStack(amount);
+        }
+
+        if (itemName.equalsIgnoreCase("SteelIngot")) {
+            SteelIngot steelIngot = new SteelIngot(main);
+            return steelIngot.getItemStack(amount);
         }
 
         if (itemName.equalsIgnoreCase("Saddle")) {

@@ -26,6 +26,7 @@ public class ListItemsCommand {
 
                 // custom
                 player.sendMessage(ChatColor.AQUA + "Salt");
+                player.sendMessage(ChatColor.AQUA + "SteelIngot");
 
                 // uncraftable
                 player.sendMessage(ChatColor.AQUA + "BlazeRod");
