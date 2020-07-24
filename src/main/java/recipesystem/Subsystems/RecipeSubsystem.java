@@ -1,5 +1,6 @@
 package recipesystem.Subsystems;
 
+import recipesystem.ItemStacks.Custom.SteelIngot;
 import recipesystem.ItemStacks.Uncraftable.*;
 import recipesystem.ItemStacks.Custom.Salt;
 import recipesystem.Main;
@@ -17,6 +18,9 @@ public class RecipeSubsystem {
         // custom items
         Salt salt = new Salt(main);
         salt.registerRecipe();
+
+        SteelIngot steelIngot = new SteelIngot(main);
+        steelIngot.registerRecipe();
 
         // uncraftable items
         Saddle saddle = new Saddle(main);
