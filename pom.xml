@@ -6,7 +6,7 @@
 
     <groupId>KingdomProgrammers</groupId>
     <artifactId>More-Recipes</artifactId>
-    <version>v1.2</version>
+    <version>v1.3</version>
     <packaging>jar</packaging>
 
     <name>More Recipes</name>
