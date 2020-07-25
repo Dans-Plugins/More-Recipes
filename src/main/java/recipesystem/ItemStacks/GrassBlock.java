@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Uncraftable;
+package recipesystem.ItemStacks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,27 +12,27 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.BLAZE_ROD;
 import static org.bukkit.Material.GRASS_BLOCK;
-import static org.bukkit.Material.LEAD;
 
-public class Lead {
+public class GrassBlock {
 
     Main main = null;
 
-    public Lead(Main plugin) {
+    public GrassBlock(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        return main.itemstacks.createItemStack(amount, LEAD, "Lead", "Used to lead animals or keep them in one place.");
+        return main.itemstacks.createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "more_recipes_lead");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_grass_block");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("SS0", "SI0", "00S");
-        recipe.setIngredient('S', Material.STRING);
-        recipe.setIngredient('I', Material.IRON_BLOCK);
+        recipe.shape("000", "0G0", "0D0");
+        recipe.setIngredient('G', Material.GRASS);
+        recipe.setIngredient('D', Material.DIRT);
         Bukkit.addRecipe(recipe);
     }
 

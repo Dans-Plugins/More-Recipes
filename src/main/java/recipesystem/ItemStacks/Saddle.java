@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Uncraftable;
+package recipesystem.ItemStacks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -12,26 +12,27 @@ import recipesystem.Main;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.bukkit.Material.NAME_TAG;
 import static org.bukkit.Material.SADDLE;
-import static org.bukkit.Material.STRING;
 
-public class StringItem {
+public class Saddle {
 
     Main main = null;
 
-    public StringItem(Main plugin) {
+    public Saddle(Main plugin) {
         main = plugin;
     }
 
     public ItemStack getItemStack(int amount) {
-        return main.itemstacks.createItemStack(amount, STRING, "String", "Used to craft bows, fishing poles and wool.");
+        return main.itemstacks.createItemStack(amount, SADDLE, "Saddle", "Used to ride certain animals.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(main, "more_recipes_string");
+        NamespacedKey key = new NamespacedKey(main, "more_recipes_saddle");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
-        recipe.shape("GG0", "0G0", "0GG");
-        recipe.setIngredient('G', Material.GRASS);
+        recipe.shape("LLL", "L0L", "I0I");
+        recipe.setIngredient('L', Material.LEATHER);
+        recipe.setIngredient('I', Material.IRON_BLOCK);
         Bukkit.addRecipe(recipe);
     }
 

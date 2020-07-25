@@ -1,8 +1,6 @@
 package recipesystem.Subsystems;
 
-import recipesystem.ItemStacks.Custom.ConquestTextures.SteelIngot;
-import recipesystem.ItemStacks.Uncraftable.*;
-import recipesystem.ItemStacks.Custom.VanillaTextures.Salt;
+import recipesystem.ItemStacks.*;
 import recipesystem.Main;
 
 public class RecipeSubsystem {
@@ -14,15 +12,6 @@ public class RecipeSubsystem {
     }
 
     public void registerRecipes() {
-
-        // custom items
-        Salt salt = new Salt(main);
-        salt.registerRecipe();
-
-        SteelIngot steelIngot = new SteelIngot(main);
-        steelIngot.registerRecipe();
-
-        // uncraftable items
         Saddle saddle = new Saddle(main);
         saddle.registerRecipe();
 

@@ -1,4 +1,4 @@
-package recipesystem.ItemStacks.Uncraftable;
+package recipesystem.ItemStacks;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

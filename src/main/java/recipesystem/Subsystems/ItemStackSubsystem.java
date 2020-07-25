@@ -4,9 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import recipesystem.ItemStacks.Custom.ConquestTextures.SteelIngot;
-import recipesystem.ItemStacks.Uncraftable.*;
-import recipesystem.ItemStacks.Custom.VanillaTextures.Salt;
+import recipesystem.ItemStacks.*;
 import recipesystem.Main;
 
 import java.util.ArrayList;
@@ -36,16 +34,6 @@ public class ItemStackSubsystem {
     }
 
     public ItemStack getItemStack(String itemName, int amount) {
-
-        if (itemName.equalsIgnoreCase("Salt")) {
-            Salt salt = new Salt(main);
-            return salt.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("SteelIngot")) {
-            SteelIngot steelIngot = new SteelIngot(main);
-            return steelIngot.getItemStack(amount);
-        }
 
         if (itemName.equalsIgnoreCase("Saddle")) {
             Saddle saddle = new Saddle(main);

@@ -24,11 +24,6 @@ public class ListItemsCommand {
                 // title
                 player.sendMessage(ChatColor.AQUA + " == More Recipes - Items == ");
 
-                // custom
-                player.sendMessage(ChatColor.AQUA + "Salt");
-                player.sendMessage(ChatColor.AQUA + "SteelIngot");
-
-                // uncraftable
                 player.sendMessage(ChatColor.AQUA + "BlazeRod");
                 player.sendMessage(ChatColor.AQUA + "ChainmailBoots");
                 player.sendMessage(ChatColor.AQUA + "ChainmailChestplate");
