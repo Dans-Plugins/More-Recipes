@@ -1,5 +1,5 @@
 name: More-Recipes
-version: "1.5"
+version: "1.5-alpha-1"
 author: DanTheTechMan
 main: dansplugins.recipesystem.MoreRecipes
 api-version: "1.13"
