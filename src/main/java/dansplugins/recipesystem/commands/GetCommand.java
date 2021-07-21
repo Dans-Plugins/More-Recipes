@@ -9,7 +9,7 @@ import dansplugins.recipesystem.MoreRecipes;
 
 public class GetCommand {
 
-    public void getItem(CommandSender sender, String[] args) {
+    public void execute(CommandSender sender, String[] args) {
 
         if (sender instanceof Player) {
 
