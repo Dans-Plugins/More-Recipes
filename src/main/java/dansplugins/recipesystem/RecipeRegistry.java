@@ -65,6 +65,9 @@ public class RecipeRegistry {
 
         Cobweb cobweb = new Cobweb();
         cobweb.registerRecipe();
+
+        SlimeBall slimeBall = new SlimeBall();
+        slimeBall.registerRecipe();
     }
 
 }
