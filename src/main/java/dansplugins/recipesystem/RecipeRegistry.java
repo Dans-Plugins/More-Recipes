@@ -59,6 +59,9 @@ public class RecipeRegistry {
 
         DiamondHorseArmor diamondHorseArmor = new DiamondHorseArmor();
         diamondHorseArmor.registerRecipe();
+
+        Gunpowder gunpowder = new Gunpowder();
+        gunpowder.registerRecipe();
     }
 
 }

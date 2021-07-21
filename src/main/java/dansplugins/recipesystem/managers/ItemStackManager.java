@@ -111,6 +111,11 @@ public class ItemStackManager {
             return diamondHorseArmor.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("Gunpowder")) {
+            Gunpowder gunpowder = new Gunpowder();
+            return gunpowder.getItemStack(amount);
+        }
+
         return null;
     }
 
