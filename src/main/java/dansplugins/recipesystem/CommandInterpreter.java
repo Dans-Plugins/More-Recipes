@@ -1,5 +1,6 @@
 package dansplugins.recipesystem;
 
+import dansplugins.recipesystem.commands.HelpCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import dansplugins.recipesystem.commands.GetCommand;
@@ -16,20 +17,27 @@ public class CommandInterpreter {
                 return true;
             }
 
-            if (args[0].equalsIgnoreCase("get")) {
-                GetCommand command = new GetCommand();
-                command.getItem(sender, args);
+            if (args[0].equalsIgnoreCase("help")) {
+                HelpCommand command = new HelpCommand();
+                command.execute(sender);
                 return true;
             }
 
             if (args[0].equalsIgnoreCase("listitems")) {
                 ListItemsCommand command = new ListItemsCommand();
-                command.showListToPlayer(sender);
+                command.execute(sender);
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("get")) {
+                GetCommand command = new GetCommand();
+                command.execute(sender, args);
                 return true;
             }
 
         }
 
+        sender.sendMessage(ChatColor.RED + "More Recipes doesn't recognize that command.");
         return false;
     }
 

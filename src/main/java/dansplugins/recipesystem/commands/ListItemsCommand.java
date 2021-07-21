@@ -10,7 +10,7 @@ import dansplugins.recipesystem.MoreRecipes;
 
 public class ListItemsCommand {
 
-    public void showListToPlayer(CommandSender sender) {
+    public void execute(CommandSender sender) {
 
         if (sender instanceof Player) {
 
