@@ -11,7 +11,7 @@ public final class MoreRecipes extends JavaPlugin {
     private static MoreRecipes instance;
 
     // version
-    public String version = "v1.4";
+    public String version = "v1.5";
 
     public static MoreRecipes getInstance() {
         return instance;
