@@ -8,16 +8,20 @@ import dansplugins.recipesystem.managers.ItemStackManager;
 
 public final class MoreRecipes extends JavaPlugin {
 
-    // version
-    public static String version = "v1.4";
+    private static MoreRecipes instance;
 
-    // subsystems
-    public ItemStackManager itemstacks = new ItemStackManager(this);
-    public RecipeRegistry recipes = new RecipeRegistry(this);
+    // version
+    public String version = "v1.4";
+
+    public static MoreRecipes getInstance() {
+        return instance;
+    }
 
     @Override
     public void onEnable() {
-        recipes.registerRecipes();
+        instance = this;
+
+        RecipeRegistry.getInstance().registerRecipes();
 
         // bStats
         int pluginId = 12140;
@@ -30,7 +34,7 @@ public final class MoreRecipes extends JavaPlugin {
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        CommandInterpreter commandInterpreter = new CommandInterpreter(this);
+        CommandInterpreter commandInterpreter = new CommandInterpreter();
         return commandInterpreter.interpretCommand(sender, label, args);
     }
 }

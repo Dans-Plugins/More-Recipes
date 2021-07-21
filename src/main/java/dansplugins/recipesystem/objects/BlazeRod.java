@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.objects;
 
+import dansplugins.recipesystem.managers.ItemStackManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,18 +12,12 @@ import static org.bukkit.Material.BLAZE_ROD;
 
 public class BlazeRod {
 
-    MoreRecipes moreRecipes = null;
-
-    public BlazeRod(MoreRecipes plugin) {
-        moreRecipes = plugin;
-    }
-
     public ItemStack getItemStack(int amount) {
-        return moreRecipes.itemstacks.createItemStack(amount, BLAZE_ROD, "Blaze Rod", "A rod of blazing fire.");
+        return ItemStackManager.getInstance().createItemStack(amount, BLAZE_ROD, "Blaze Rod", "A rod of blazing fire.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_blaze_rod");
+        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_blaze_rod");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("ILI", "ILI", "ILI");
         recipe.setIngredient('I', Material.IRON_BLOCK);
