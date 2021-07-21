@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.objects;
 
+import dansplugins.recipesystem.managers.ItemStackManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,18 +12,12 @@ import static org.bukkit.Material.GRASS_BLOCK;
 
 public class GrassBlock {
 
-    MoreRecipes moreRecipes = null;
-
-    public GrassBlock(MoreRecipes plugin) {
-        moreRecipes = plugin;
-    }
-
     public ItemStack getItemStack(int amount) {
-        return moreRecipes.itemstacks.createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
+        return ItemStackManager.getInstance().createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_grass_block");
+        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_grass_block");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("000", "0G0", "0D0");
         recipe.setIngredient('G', Material.GRASS);

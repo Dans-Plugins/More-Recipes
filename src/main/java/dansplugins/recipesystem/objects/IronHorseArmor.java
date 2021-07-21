@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.objects;
 
+import dansplugins.recipesystem.managers.ItemStackManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,18 +12,12 @@ import static org.bukkit.Material.IRON_HORSE_ARMOR;
 
 public class IronHorseArmor {
 
-    MoreRecipes moreRecipes = null;
-
-    public IronHorseArmor(MoreRecipes plugin) {
-        moreRecipes = plugin;
-    }
-
     public ItemStack getItemStack(int amount) {
-        return moreRecipes.itemstacks.createItemStack(amount, IRON_HORSE_ARMOR, "Iron Horse Armor", "Horse Armor crafted out of Iron");
+        return ItemStackManager.getInstance().createItemStack(amount, IRON_HORSE_ARMOR, "Iron Horse Armor", "Horse Armor crafted out of Iron");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_iron_horse_armor");
+        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_iron_horse_armor");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("III", "III", "S0S");
         recipe.setIngredient('I', Material.IRON_INGOT);

@@ -7,12 +7,6 @@ import dansplugins.recipesystem.MoreRecipes;
 
 public class ListItemsCommand {
 
-    MoreRecipes moreRecipes = null;
-
-    public ListItemsCommand(MoreRecipes plugin) {
-        moreRecipes = plugin;
-    }
-
     public void showListToPlayer(CommandSender sender) {
 
         if (sender instanceof Player) {

@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.objects;
 
+import dansplugins.recipesystem.managers.ItemStackManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,18 +12,12 @@ import static org.bukkit.Material.TOTEM_OF_UNDYING;
 
 public class TotemOfUndying {
 
-    MoreRecipes moreRecipes = null;
-
-    public TotemOfUndying(MoreRecipes plugin) {
-        moreRecipes = plugin;
-    }
-
     public ItemStack getItemStack(int amount) {
-        return moreRecipes.itemstacks.createItemStack(amount, TOTEM_OF_UNDYING, "Totem of Undying", "Used for a second chance at life.");
+        return ItemStackManager.getInstance().createItemStack(amount, TOTEM_OF_UNDYING, "Totem of Undying", "Used for a second chance at life.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_totem_of_undying");
+        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_totem_of_undying");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("0D0", "BBB", "EBE");
         recipe.setIngredient('D', Material.DIAMOND);
