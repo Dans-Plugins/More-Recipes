@@ -1,5 +1,6 @@
 package dansplugins.recipesystem;
 
+import dansplugins.recipesystem.bstats.Metrics;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +18,10 @@ public final class MoreRecipes extends JavaPlugin {
     @Override
     public void onEnable() {
         recipes.registerRecipes();
+
+        // bStats
+        int pluginId = 12140;
+        Metrics metrics = new Metrics(this, pluginId);
     }
 
     @Override
