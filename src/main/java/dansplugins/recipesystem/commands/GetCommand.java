@@ -1,17 +1,17 @@
-package recipesystem.Commands;
+package dansplugins.recipesystem.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import recipesystem.Main;
+import dansplugins.recipesystem.MoreRecipes;
 
 public class GetCommand {
 
-    Main main = null;
+    MoreRecipes moreRecipes = null;
 
-    public GetCommand(Main plugin) {
-        main = plugin;
+    public GetCommand(MoreRecipes plugin) {
+        moreRecipes = plugin;
     }
 
     public void getItem(CommandSender sender, String[] args) {
@@ -27,7 +27,7 @@ public class GetCommand {
                     String itemToGet = args[1];
                     int amount = Integer.parseInt(args[2]);
 
-                    ItemStack item = main.itemstacks.getItemStack(itemToGet, amount);
+                    ItemStack item = moreRecipes.itemstacks.getItemStack(itemToGet, amount);
 
                     if (item != null) {
                         // add to player's inventory

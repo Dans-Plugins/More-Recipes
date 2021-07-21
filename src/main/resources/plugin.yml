@@ -1,7 +1,7 @@
 name: More-Recipes
-version: "1.3"
+version: "1.4"
 author: DanTheTechMan
-main: recipesystem.Main
+main: dansplugins.recipesystem.MoreRecipes
 api-version: "1.13"
 
 commands:
