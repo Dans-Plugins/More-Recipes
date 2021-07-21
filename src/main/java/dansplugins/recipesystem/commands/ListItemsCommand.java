@@ -1,16 +1,16 @@
-package recipesystem.Commands;
+package dansplugins.recipesystem.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import recipesystem.Main;
+import dansplugins.recipesystem.MoreRecipes;
 
 public class ListItemsCommand {
 
-    Main main = null;
+    MoreRecipes moreRecipes = null;
 
-    public ListItemsCommand(Main plugin) {
-        main = plugin;
+    public ListItemsCommand(MoreRecipes plugin) {
+        moreRecipes = plugin;
     }
 
     public void showListToPlayer(CommandSender sender) {
