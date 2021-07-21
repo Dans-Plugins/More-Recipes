@@ -121,6 +121,11 @@ public class ItemStackManager {
             return cobweb.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("SlimeBall")) {
+            SlimeBall slimeBall = new SlimeBall();
+            return slimeBall.getItemStack(amount);
+        }
+
         return null;
     }
 
