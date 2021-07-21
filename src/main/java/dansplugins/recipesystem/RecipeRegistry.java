@@ -62,6 +62,9 @@ public class RecipeRegistry {
 
         Gunpowder gunpowder = new Gunpowder();
         gunpowder.registerRecipe();
+
+        Cobweb cobweb = new Cobweb();
+        cobweb.registerRecipe();
     }
 
 }

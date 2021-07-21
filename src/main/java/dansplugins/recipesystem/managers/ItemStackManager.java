@@ -116,6 +116,11 @@ public class ItemStackManager {
             return gunpowder.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("Cobweb")) {
+            Cobweb cobweb = new Cobweb();
+            return cobweb.getItemStack(amount);
+        }
+
         return null;
     }
 
