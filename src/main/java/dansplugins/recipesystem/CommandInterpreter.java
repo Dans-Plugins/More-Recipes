@@ -1,10 +1,10 @@
 package dansplugins.recipesystem;
 
+import dansplugins.recipesystem.commands.GetCommand;
 import dansplugins.recipesystem.commands.HelpCommand;
+import dansplugins.recipesystem.commands.ListItemsCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import dansplugins.recipesystem.commands.GetCommand;
-import dansplugins.recipesystem.commands.ListItemsCommand;
 
 public class CommandInterpreter {
 

@@ -1,12 +1,8 @@
 package dansplugins.recipesystem.commands;
 
-import dansplugins.recipesystem.objects.Cobweb;
-import dansplugins.recipesystem.objects.Gunpowder;
-import dansplugins.recipesystem.objects.SlimeBall;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import dansplugins.recipesystem.MoreRecipes;
 
 public class ListItemsCommand {
 

@@ -4,7 +4,6 @@ import dansplugins.recipesystem.bstats.Metrics;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
-import dansplugins.recipesystem.managers.ItemStackManager;
 
 public final class MoreRecipes extends JavaPlugin {
 
