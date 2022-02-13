@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.managers.ItemStackManager;
+import dansplugins.recipesystem.services.LocalItemStackService;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +13,7 @@ import static org.bukkit.Material.GOLDEN_HORSE_ARMOR;
 public class GoldenHorseArmor {
 
     public ItemStack getItemStack(int amount) {
-        return ItemStackManager.getInstance().createItemStack(amount, GOLDEN_HORSE_ARMOR, "Golden Horse Armor", "Horse Armor crafted out of Pure Gold");
+        return LocalItemStackService.getInstance().createItemStack(amount, GOLDEN_HORSE_ARMOR, "Golden Horse Armor", "Horse Armor crafted out of Pure Gold");
     }
 
     public void registerRecipe() {

@@ -1,4 +1,4 @@
-package dansplugins.recipesystem;
+package dansplugins.recipesystem.utils;
 
 import dansplugins.recipesystem.objects.*;
 

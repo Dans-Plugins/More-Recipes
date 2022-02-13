@@ -1,6 +1,6 @@
 package dansplugins.recipesystem.commands;
 
-import dansplugins.recipesystem.managers.ItemStackManager;
+import dansplugins.recipesystem.services.LocalItemStackService;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,7 +21,7 @@ public class GetCommand {
                     String itemToGet = args[1];
                     int amount = Integer.parseInt(args[2]);
 
-                    ItemStack item = ItemStackManager.getInstance().getItemStack(itemToGet, amount);
+                    ItemStack item = LocalItemStackService.getInstance().getItemStack(itemToGet, amount);
 
                     if (item != null) {
                         // add to player's inventory

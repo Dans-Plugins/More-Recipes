@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.managers.ItemStackManager;
+import dansplugins.recipesystem.services.LocalItemStackService;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +13,7 @@ import static org.bukkit.Material.GRASS_BLOCK;
 public class GrassBlock {
 
     public ItemStack getItemStack(int amount) {
-        return ItemStackManager.getInstance().createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
+        return LocalItemStackService.getInstance().createItemStack(amount, GRASS_BLOCK, "Grass Block", "Dirt with life on top.");
     }
 
     public void registerRecipe() {

@@ -1,12 +1,13 @@
-package dansplugins.recipesystem;
+package dansplugins.recipesystem.services;
 
+import dansplugins.recipesystem.MoreRecipes;
 import dansplugins.recipesystem.commands.GetCommand;
 import dansplugins.recipesystem.commands.HelpCommand;
 import dansplugins.recipesystem.commands.ListItemsCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-public class CommandInterpreter {
+public class LocalCommandService {
 
     public boolean interpretCommand(CommandSender sender, String label, String[] args) {
         if (label.equalsIgnoreCase("morerecipes") || label.equalsIgnoreCase("mr")) {

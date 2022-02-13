@@ -1,4 +1,4 @@
-package dansplugins.recipesystem.managers;
+package dansplugins.recipesystem.services;
 
 import dansplugins.recipesystem.objects.*;
 import org.bukkit.ChatColor;
@@ -9,17 +9,17 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemStackManager {
+public class LocalItemStackService {
     
-    private static ItemStackManager instance;
+    private static LocalItemStackService instance;
     
-    private ItemStackManager() {
+    private LocalItemStackService() {
         
     }
     
-    public static ItemStackManager getInstance() {
+    public static LocalItemStackService getInstance() {
         if (instance == null) {
-            instance = new ItemStackManager();
+            instance = new LocalItemStackService();
         }
         return instance;
     }

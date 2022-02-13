@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.managers.ItemStackManager;
+import dansplugins.recipesystem.services.LocalItemStackService;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -13,7 +13,7 @@ import static org.bukkit.Material.STRING;
 public class StringItem {
 
     public ItemStack getItemStack(int amount) {
-        return ItemStackManager.getInstance().createItemStack(amount, STRING, "String", "Used to craft bows, fishing poles and wool.");
+        return LocalItemStackService.getInstance().createItemStack(amount, STRING, "String", "Used to craft bows, fishing poles and wool.");
     }
 
     public void registerRecipe() {
