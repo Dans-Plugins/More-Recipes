@@ -70,5 +70,11 @@
             <version>1.13.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>preponderous</groupId>
+            <artifactId>ponder</artifactId>
+            <version>v0.15-alpha-2</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

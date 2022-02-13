@@ -3,46 +3,42 @@ package dansplugins.recipesystem.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 
-public class ListItemsCommand {
+import java.util.ArrayList;
+import java.util.Arrays;
 
-    public void execute(CommandSender sender) {
+public class ListItemsCommand extends AbstractPluginCommand {
 
-        if (sender instanceof Player) {
+    public ListItemsCommand() {
+        super(new ArrayList<>(Arrays.asList("list")), new ArrayList<>(Arrays.asList("morerecipes.list")));
+    }
 
-            Player player = (Player) sender;
+    public boolean execute(CommandSender sender) {
+        sender.sendMessage(ChatColor.AQUA + " == Items provided by More Recipes == ");
+        sender.sendMessage(ChatColor.AQUA + "BlazeRod");
+        sender.sendMessage(ChatColor.AQUA + "ChainmailBoots");
+        sender.sendMessage(ChatColor.AQUA + "ChainmailChestplate");
+        sender.sendMessage(ChatColor.AQUA + "ChainmailHelmet");
+        sender.sendMessage(ChatColor.AQUA + "ChainmailLeggings");
+        sender.sendMessage(ChatColor.AQUA + "Cobweb");
+        sender.sendMessage(ChatColor.AQUA + "DiamondHorseArmor");
+        sender.sendMessage(ChatColor.AQUA + "GoldenHorseArmor");
+        sender.sendMessage(ChatColor.AQUA + "GrassBlock");
+        sender.sendMessage(ChatColor.AQUA + "Gunpowder");
+        sender.sendMessage(ChatColor.AQUA + "IronHorseArmor");
+        sender.sendMessage(ChatColor.AQUA + "Lead");
+        sender.sendMessage(ChatColor.AQUA + "NameTag");
+        sender.sendMessage(ChatColor.AQUA + "Saddle");
+        sender.sendMessage(ChatColor.AQUA + "SlimeBall");
+        sender.sendMessage(ChatColor.AQUA + "String");
+        sender.sendMessage(ChatColor.AQUA + "TotemOfUndying");
+        return true;
+    }
 
-            if (player.hasPermission("morerecipes.listitems") || player.hasPermission("morerecipes.default")) {
-
-                // title
-                player.sendMessage(ChatColor.AQUA + " == More Recipes - Items == ");
-
-                // items
-                player.sendMessage(ChatColor.AQUA + "BlazeRod");
-                player.sendMessage(ChatColor.AQUA + "ChainmailBoots");
-                player.sendMessage(ChatColor.AQUA + "ChainmailChestplate");
-                player.sendMessage(ChatColor.AQUA + "ChainmailHelmet");
-                player.sendMessage(ChatColor.AQUA + "ChainmailLeggings");
-                player.sendMessage(ChatColor.AQUA + "Cobweb");
-                player.sendMessage(ChatColor.AQUA + "DiamondHorseArmor");
-                player.sendMessage(ChatColor.AQUA + "GoldenHorseArmor");
-                player.sendMessage(ChatColor.AQUA + "GrassBlock");
-                player.sendMessage(ChatColor.AQUA + "Gunpowder");
-                player.sendMessage(ChatColor.AQUA + "IronHorseArmor");
-                player.sendMessage(ChatColor.AQUA + "Lead");
-                player.sendMessage(ChatColor.AQUA + "NameTag");
-                player.sendMessage(ChatColor.AQUA + "Saddle");
-                player.sendMessage(ChatColor.AQUA + "SlimeBall");
-                player.sendMessage(ChatColor.AQUA + "String");
-                player.sendMessage(ChatColor.AQUA + "TotemOfUndying");
-
-            }
-            else {
-                player.sendMessage(ChatColor.RED + "Sorry! In order to use this command, you need the following permission: 'morerecipes.listitems'");
-            }
-
-        }
-
+    @Override
+    public boolean execute(CommandSender commandSender, String[] strings) {
+        return execute(commandSender);
     }
 
 }
