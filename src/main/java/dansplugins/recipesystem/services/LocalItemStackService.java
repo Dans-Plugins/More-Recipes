@@ -126,6 +126,11 @@ public class LocalItemStackService {
             return slimeBall.getItemStack(amount);
         }
 
+        if (itemName.equalsIgnoreCase("PrismarineShard")) {
+            PrismarineShard prismarineShard = new PrismarineShard();
+            return prismarineShard.getItemStack(amount);
+        }
+
         return null;
     }
 

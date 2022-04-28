@@ -68,6 +68,9 @@ public class RecipeRegistry {
 
         SlimeBall slimeBall = new SlimeBall();
         slimeBall.registerRecipe();
+
+        PrismarineShard prismarineShard = new PrismarineShard();
+        prismarineShard.registerRecipe();
     }
 
 }
