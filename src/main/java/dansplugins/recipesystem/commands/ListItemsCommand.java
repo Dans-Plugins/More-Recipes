@@ -28,6 +28,7 @@ public class ListItemsCommand extends AbstractPluginCommand {
         sender.sendMessage(ChatColor.AQUA + "IronHorseArmor");
         sender.sendMessage(ChatColor.AQUA + "Lead");
         sender.sendMessage(ChatColor.AQUA + "NameTag");
+        sender.sendMessage(ChatColor.AQUA + "PrismarineShard");
         sender.sendMessage(ChatColor.AQUA + "Saddle");
         sender.sendMessage(ChatColor.AQUA + "SlimeBall");
         sender.sendMessage(ChatColor.AQUA + "String");
