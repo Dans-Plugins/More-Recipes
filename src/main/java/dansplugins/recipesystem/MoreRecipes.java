@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public final class MoreRecipes extends PonderBukkitPlugin {
     private static MoreRecipes instance;
-    public final String version = "v1.6-alpha-1";
+    private final String pluginVersion = "v" + getDescription().getVersion();
     private final CommandService commandService = new CommandService((PonderMC) getPonder());
 
     public static MoreRecipes getInstance() {
@@ -56,7 +56,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
     }
 
     public String getVersion() {
-        return version;
+        return pluginVersion;
     }
 
     private void handlebStatsIntegration() {

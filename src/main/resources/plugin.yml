@@ -1,6 +1,6 @@
 name: More-Recipes
-version: "1.5"
-author: DanTheTechMan
+version: '${project.version}'
+author: Daniel McCoy Stephenson, Rykurock
 main: dansplugins.recipesystem.MoreRecipes
 api-version: "1.13"
 

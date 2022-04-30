@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
 import static org.bukkit.Material.PRISMARINE_SHARD;
-import static org.bukkit.Material.TOTEM_OF_UNDYING;
 
 public class PrismarineShard {
 
