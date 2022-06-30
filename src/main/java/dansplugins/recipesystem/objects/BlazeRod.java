@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.services.LocalItemStackService;
+import dansplugins.recipesystem.services.ItemStackService;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,13 +11,20 @@ import org.bukkit.inventory.ShapedRecipe;
 import static org.bukkit.Material.BLAZE_ROD;
 
 public class BlazeRod {
+    private final ItemStackService itemStackService;
+    private final MoreRecipes moreRecipes;
+
+    public BlazeRod(ItemStackService itemStackService, MoreRecipes moreRecipes) {
+        this.itemStackService = itemStackService;
+        this.moreRecipes = moreRecipes;
+    }
 
     public ItemStack getItemStack(int amount) {
-        return LocalItemStackService.getInstance().createItemStack(amount, BLAZE_ROD, "Blaze Rod", "A rod of blazing fire.");
+        return itemStackService.createItemStack(amount, BLAZE_ROD, "Blaze Rod", "A rod of blazing fire.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_blaze_rod");
+        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_blaze_rod");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("ILI", "ILI", "ILI");
         recipe.setIngredient('I', Material.IRON_BLOCK);

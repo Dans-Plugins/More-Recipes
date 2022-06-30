@@ -1,6 +1,6 @@
 package dansplugins.recipesystem.commands;
 
-import dansplugins.recipesystem.services.LocalItemStackService;
+import dansplugins.recipesystem.services.ItemStackService;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GetCommand extends AbstractPluginCommand {
+    private final ItemStackService itemStackService;
 
-    public GetCommand() {
+    public GetCommand(ItemStackService itemStackService) {
         super(new ArrayList<>(Arrays.asList("get")), new ArrayList<>(Arrays.asList("morerecipes.get")));
+        this.itemStackService = itemStackService;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class GetCommand extends AbstractPluginCommand {
         String itemToGet = args[1];
         int amount = Integer.parseInt(args[2]);
 
-        ItemStack item = LocalItemStackService.getInstance().getItemStack(itemToGet, amount);
+        ItemStack item = itemStackService.getItemStack(itemToGet, amount);
 
         if (item == null) {
             player.sendMessage(ChatColor.RED + "That isn't an item in More Recipes!");
