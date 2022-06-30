@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.services.LocalItemStackService;
+import dansplugins.recipesystem.services.ItemStackService;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,13 +11,20 @@ import org.bukkit.inventory.ShapedRecipe;
 import static org.bukkit.Material.SADDLE;
 
 public class Saddle {
+    private final ItemStackService itemStackService;
+    private final MoreRecipes moreRecipes;
+
+    public Saddle(ItemStackService itemStackService, MoreRecipes moreRecipes) {
+        this.itemStackService = itemStackService;
+        this.moreRecipes = moreRecipes;
+    }
 
     public ItemStack getItemStack(int amount) {
-        return LocalItemStackService.getInstance().createItemStack(amount, SADDLE, "Saddle", "Used to ride certain animals.");
+        return itemStackService.createItemStack(amount, SADDLE, "Saddle", "Used to ride certain animals.");
     }
 
     public void registerRecipe() {
-        NamespacedKey key = new NamespacedKey(MoreRecipes.getInstance(), "more_recipes_saddle");
+        NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_saddle");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("LLL", "L0L", "I0I");
         recipe.setIngredient('L', Material.LEATHER);

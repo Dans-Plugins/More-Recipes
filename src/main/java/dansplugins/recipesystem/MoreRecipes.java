@@ -5,6 +5,7 @@ import dansplugins.recipesystem.commands.DefaultCommand;
 import dansplugins.recipesystem.commands.GetCommand;
 import dansplugins.recipesystem.commands.HelpCommand;
 import dansplugins.recipesystem.commands.ListItemsCommand;
+import dansplugins.recipesystem.services.ItemStackService;
 import dansplugins.recipesystem.utils.RecipeRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -17,18 +18,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public final class MoreRecipes extends PonderBukkitPlugin {
-    private static MoreRecipes instance;
     private final String pluginVersion = "v" + getDescription().getVersion();
-    private final CommandService commandService = new CommandService((PonderMC) getPonder());
 
-    public static MoreRecipes getInstance() {
-        return instance;
-    }
+    private final CommandService commandService = new CommandService(getPonder());
+    private final ItemStackService itemStackService = new ItemStackService(this);
+    private final RecipeRegistry recipeRegistry = new RecipeRegistry(itemStackService, this);
 
     @Override
     public void onEnable() {
-        instance = this;
-        RecipeRegistry.getInstance().registerRecipes();
+        recipeRegistry.registerRecipes();
         handlebStatsIntegration();
         initializeCommandService();
     }
@@ -49,7 +47,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            DefaultCommand defaultCommand = new DefaultCommand();
+            DefaultCommand defaultCommand = new DefaultCommand(this);
             return defaultCommand.execute(sender);
         }
         return commandService.interpretAndExecuteCommand(sender, label, args);
@@ -70,7 +68,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
     private void initializeCommandService() {
         ArrayList<AbstractPluginCommand> commands = new ArrayList<AbstractPluginCommand>(Arrays.asList(
                 new HelpCommand(),
-                new GetCommand(),
+                new GetCommand(itemStackService),
                 new ListItemsCommand()
         ));
         commandService.initialize(commands, "That command wasn't found.");
