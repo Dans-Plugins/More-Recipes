@@ -22,7 +22,7 @@ public class HelpCommand extends AbstractPluginCommand {
         }
         sender.sendMessage(ChatColor.AQUA + "=== More Recipes Commands ===");
         sender.sendMessage(ChatColor.AQUA + "/mr help - View a list of helpful commands.");
-        sender.sendMessage(ChatColor.AQUA + "/mr listitems - List the items that can be crafted.");
+        sender.sendMessage(ChatColor.AQUA + "/mr list - List the items that can be crafted.");
         sender.sendMessage(ChatColor.AQUA + "/mr get (name) (amount) - Get an certain amount of a specified item.");
         return true;
     }

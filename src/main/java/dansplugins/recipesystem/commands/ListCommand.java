@@ -7,9 +7,9 @@ import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ListItemsCommand extends AbstractPluginCommand {
+public class ListCommand extends AbstractPluginCommand {
 
-    public ListItemsCommand() {
+    public ListCommand() {
         super(new ArrayList<>(Arrays.asList("list")), new ArrayList<>(Arrays.asList("morerecipes.list")));
     }
 
