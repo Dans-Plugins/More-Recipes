@@ -4,12 +4,11 @@ import dansplugins.recipesystem.bstats.Metrics;
 import dansplugins.recipesystem.commands.DefaultCommand;
 import dansplugins.recipesystem.commands.GetCommand;
 import dansplugins.recipesystem.commands.HelpCommand;
-import dansplugins.recipesystem.commands.ListItemsCommand;
+import dansplugins.recipesystem.commands.ListCommand;
 import dansplugins.recipesystem.services.ItemStackService;
 import dansplugins.recipesystem.utils.RecipeRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import preponderous.ponder.minecraft.bukkit.PonderMC;
 import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
 import preponderous.ponder.minecraft.bukkit.services.CommandService;
@@ -69,7 +68,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
         ArrayList<AbstractPluginCommand> commands = new ArrayList<AbstractPluginCommand>(Arrays.asList(
                 new HelpCommand(),
                 new GetCommand(itemStackService),
-                new ListItemsCommand()
+                new ListCommand()
         ));
         commandService.initialize(commands, "That command wasn't found.");
     }
