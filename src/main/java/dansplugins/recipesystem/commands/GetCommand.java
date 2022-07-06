@@ -38,8 +38,8 @@ public class GetCommand extends AbstractPluginCommand {
             return false;
         }
 
-        String itemToGet = args[1];
-        int amount = Integer.parseInt(args[2]);
+        String itemToGet = args[0];
+        int amount = Integer.parseInt(args[1]);
 
         ItemStack item = itemStackService.getItemStack(itemToGet, amount);
 
