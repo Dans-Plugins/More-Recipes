@@ -35,6 +35,7 @@ public class GetCommand extends AbstractPluginCommand {
 
         if (args.length < 2) {
             player.sendMessage(ChatColor.RED + "Usage: /morerecipes get (itemName) (amount)");
+            return false;
         }
 
         String itemToGet = args[1];
@@ -44,6 +45,7 @@ public class GetCommand extends AbstractPluginCommand {
 
         if (item == null) {
             player.sendMessage(ChatColor.RED + "That isn't an item in More Recipes!");
+            return false;
         }
 
         // add to player's inventory
