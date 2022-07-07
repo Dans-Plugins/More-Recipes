@@ -1,2 +1,2 @@
 # What is this?
-A plugin to extend the recipes available in minecraft.
+This Minecraft plugin adds static recipes for items that are not craftable in vanilla Minecraft.
