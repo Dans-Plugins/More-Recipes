@@ -39,7 +39,13 @@ public class GetCommand extends AbstractPluginCommand {
         }
 
         String itemToGet = args[0];
-        int amount = Integer.parseInt(args[1]);
+        int amount;
+        try {
+            amount = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            player.sendMessage(ChatColor.RED + "Usage: /morerecipes get (itemName) (amount)");
+            return false;
+        }
 
         ItemStack item = itemStackService.getItemStack(itemToGet, amount);
 
