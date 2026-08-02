@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class ListCommand extends AbstractPluginCommand {
 
     public ListCommand() {
-        super(new ArrayList<>(Arrays.asList("list")), new ArrayList<>(Arrays.asList("morerecipes.list")));
+        super(new ArrayList<>(Arrays.asList("list")), new ArrayList<>(Arrays.asList("morerecipes.listitems")));
     }
 
     public boolean execute(CommandSender sender) {
