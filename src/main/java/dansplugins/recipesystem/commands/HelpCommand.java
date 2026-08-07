@@ -2,7 +2,6 @@ package dansplugins.recipesystem.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 
 import java.util.ArrayList;
@@ -16,10 +15,6 @@ public class HelpCommand extends AbstractPluginCommand {
 
     @Override
     public boolean execute(CommandSender sender) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can't be used in the console.");
-            return false;
-        }
         sender.sendMessage(ChatColor.AQUA + "=== More Recipes Commands ===");
         sender.sendMessage(ChatColor.AQUA + "/mr help - View a list of helpful commands.");
         sender.sendMessage(ChatColor.AQUA + "/mr list - List the items that can be crafted.");
