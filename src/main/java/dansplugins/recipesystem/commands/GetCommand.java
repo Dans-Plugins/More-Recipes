@@ -60,15 +60,14 @@ public class GetCommand extends AbstractPluginCommand {
             return false;
         }
 
-        // add to player's inventory
-        // if player's inventory has space
-        if (player.getInventory().firstEmpty() == -1) {
+        // add to player's inventory, keeping whatever didn't fit
+        Map<Integer, ItemStack> leftover = player.getInventory().addItem(item);
+        int amountNotAdded = countLeftoverItems(leftover);
+
+        if (amountNotAdded >= amount) {
             player.sendMessage(ChatColor.RED + "Inventory full.");
             return false;
         }
-
-        Map<Integer, ItemStack> leftover = player.getInventory().addItem(item);
-        int amountNotAdded = countItems(leftover);
 
         if (amountNotAdded > 0) {
             player.sendMessage(ChatColor.YELLOW + "" + (amount - amountNotAdded) + " " + itemToGet
@@ -85,7 +84,7 @@ public class GetCommand extends AbstractPluginCommand {
      * @param leftover The leftover map returned by Inventory#addItem.
      * @return The total number of items that were not added.
      */
-    private int countItems(Map<Integer, ItemStack> leftover) {
+    private int countLeftoverItems(Map<Integer, ItemStack> leftover) {
         if (leftover == null) {
             return 0;
         }
