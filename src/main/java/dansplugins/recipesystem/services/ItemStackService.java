@@ -1,7 +1,7 @@
 package dansplugins.recipesystem.services;
 
 import dansplugins.recipesystem.MoreRecipes;
-import dansplugins.recipesystem.objects.*;
+import dansplugins.recipesystem.objects.MoreRecipesItem;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -32,99 +32,20 @@ public class ItemStackService {
         return item;
     }
 
+    /**
+     * Builds a stack of the named catalog item.
+     * @param itemName The name of the item, matched against the catalog ignoring case.
+     * @param amount The number of items the stack should hold.
+     * @return The item stack, or null if no catalog item goes by that name.
+     */
     public ItemStack getItemStack(String itemName, int amount) {
+        MoreRecipesItem item = MoreRecipesItem.findByName(itemName);
 
-        if (itemName.equalsIgnoreCase("Saddle")) {
-            Saddle saddle = new Saddle(this, moreRecipes);
-            return saddle.getItemStack(amount);
+        if (item == null) {
+            return null;
         }
 
-        if (itemName.equalsIgnoreCase("NameTag")) {
-            NameTag nametag = new NameTag(this, moreRecipes);
-            return nametag.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("TotemOfUndying")) {
-            TotemOfUndying totemOfUndying = new TotemOfUndying(this, moreRecipes);
-            return totemOfUndying.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("GrassBlock")) {
-            GrassBlock grassBlock = new GrassBlock(this, moreRecipes);
-            return grassBlock.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("String")) {
-            StringItem string = new StringItem(this, moreRecipes);
-            return string.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("Lead")) {
-            Lead lead = new Lead(this, moreRecipes);
-            return lead.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("BlazeRod")) {
-            BlazeRod blazeRod = new BlazeRod(this, moreRecipes);
-            return blazeRod.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("ChainmailHelmet")) {
-            ChainmailHelmet chainmailHelmet = new ChainmailHelmet(this, moreRecipes);
-            return chainmailHelmet.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("ChainmailChestplate")) {
-            ChainmailChestplate chainmailChestplate = new ChainmailChestplate(this, moreRecipes);
-            return chainmailChestplate.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("ChainmailLeggings")) {
-            ChainmailLeggings chainmailLeggings = new ChainmailLeggings(this, moreRecipes);
-            return chainmailLeggings.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("ChainmailBoots")) {
-            ChainmailBoots chainmailBoots = new ChainmailBoots(this, moreRecipes);
-            return chainmailBoots.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("IronHorseArmor")) {
-            IronHorseArmor ironHorseArmor = new IronHorseArmor(this, moreRecipes);
-            return ironHorseArmor.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("GoldenHorseArmor")) {
-            GoldenHorseArmor goldenHorseArmor = new GoldenHorseArmor(this, moreRecipes);
-            return goldenHorseArmor.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("DiamondHorseArmor")) {
-            DiamondHorseArmor diamondHorseArmor = new DiamondHorseArmor(this, moreRecipes);
-            return diamondHorseArmor.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("Gunpowder")) {
-            Gunpowder gunpowder = new Gunpowder(this, moreRecipes);
-            return gunpowder.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("Cobweb")) {
-            Cobweb cobweb = new Cobweb(this, moreRecipes);
-            return cobweb.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("SlimeBall")) {
-            SlimeBall slimeBall = new SlimeBall(this, moreRecipes);
-            return slimeBall.getItemStack(amount);
-        }
-
-        if (itemName.equalsIgnoreCase("PrismarineShard")) {
-            PrismarineShard prismarineShard = new PrismarineShard(this, moreRecipes);
-            return prismarineShard.getItemStack(amount);
-        }
-
-        return null;
+        return item.getItemStack(this, moreRecipes, amount);
     }
 
 }

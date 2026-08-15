@@ -21,7 +21,9 @@ making any changes.
 ## Coding Conventions
 
 - Each craftable item has its own class in the `objects/` package.
-- To add a new recipe, create a new class in `objects/` and register it in the main plugin class.
+- To add a new recipe, create a new class in `objects/` and add an entry for it to the
+  `MoreRecipesItem` catalog in the same package. That catalog is the single source of truth
+  driving recipe registration, `/mr get` and `/mr list` alike.
 
 ## Contribution Workflow
 

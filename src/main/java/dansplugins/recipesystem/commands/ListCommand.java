@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.commands;
 
+import dansplugins.recipesystem.objects.MoreRecipesItem;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
@@ -15,24 +16,9 @@ public class ListCommand extends AbstractPluginCommand {
 
     public boolean execute(CommandSender sender) {
         sender.sendMessage(ChatColor.AQUA + " == Items provided by More Recipes == ");
-        sender.sendMessage(ChatColor.AQUA + "BlazeRod");
-        sender.sendMessage(ChatColor.AQUA + "ChainmailBoots");
-        sender.sendMessage(ChatColor.AQUA + "ChainmailChestplate");
-        sender.sendMessage(ChatColor.AQUA + "ChainmailHelmet");
-        sender.sendMessage(ChatColor.AQUA + "ChainmailLeggings");
-        sender.sendMessage(ChatColor.AQUA + "Cobweb");
-        sender.sendMessage(ChatColor.AQUA + "DiamondHorseArmor");
-        sender.sendMessage(ChatColor.AQUA + "GoldenHorseArmor");
-        sender.sendMessage(ChatColor.AQUA + "GrassBlock");
-        sender.sendMessage(ChatColor.AQUA + "Gunpowder");
-        sender.sendMessage(ChatColor.AQUA + "IronHorseArmor");
-        sender.sendMessage(ChatColor.AQUA + "Lead");
-        sender.sendMessage(ChatColor.AQUA + "NameTag");
-        sender.sendMessage(ChatColor.AQUA + "PrismarineShard");
-        sender.sendMessage(ChatColor.AQUA + "Saddle");
-        sender.sendMessage(ChatColor.AQUA + "SlimeBall");
-        sender.sendMessage(ChatColor.AQUA + "String");
-        sender.sendMessage(ChatColor.AQUA + "TotemOfUndying");
+        for (String itemName : MoreRecipesItem.getItemNames()) {
+            sender.sendMessage(ChatColor.AQUA + itemName);
+        }
         return true;
     }
 

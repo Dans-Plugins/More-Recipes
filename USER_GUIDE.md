@@ -12,23 +12,26 @@ More Recipes is a Spigot plugin that adds crafting recipes for items that are no
 
 ## Craftable Items
 
-The following items gain crafting recipes:
+The following items gain crafting recipes. Each name below is also the name `/mr get` accepts:
 
-- Blaze Rod
-- Chainmail Boots, Chestplate, Helmet, Leggings
+- BlazeRod
+- ChainmailBoots
+- ChainmailChestplate
+- ChainmailHelmet
+- ChainmailLeggings
 - Cobweb
-- Diamond Horse Armor
-- Golden Horse Armor
-- Grass Block
+- DiamondHorseArmor
+- GoldenHorseArmor
+- GrassBlock
 - Gunpowder
-- Iron Horse Armor
+- IronHorseArmor
 - Lead
-- Name Tag
-- Prismarine Shard
+- NameTag
+- PrismarineShard
 - Saddle
-- Slime Ball
+- SlimeBall
 - String
-- Totem of Undying
+- TotemOfUndying
 
 Use `/mr list` in-game to see all available items.
 

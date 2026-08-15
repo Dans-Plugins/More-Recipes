@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed
+
+- The set of items the plugin provides is now enumerated once, in a `MoreRecipesItem` catalog, instead of being hand-maintained in the recipe registry, the `/mr get` lookup and the `/mr list` listing separately. Those three now iterate the catalog, so an item can no longer reach one of them and silently miss the others — previously, omitting one of the three edits produced an item with no recipe, an item `/mr get` refused, or an item invisible to `/mr list`, none of which failed the build. The items provided, their recipes and the order `/mr list` presents them in are unchanged.
+- `USER_GUIDE.md` now lists items under the exact names `/mr get` accepts (`BlazeRod` rather than `Blaze Rod`), and a test holds that list in step with the catalog.
+
 ### Fixed
 
 - The `Dev Release` workflow now retries publishing the `dev` prerelease before giving up. The release and its tag have to be deleted and recreated for the tag to move to the new commit, and a transient API failure inside that window previously left the repository with no `dev` release at all until the workflow was re-run by hand. Each attempt now starts from a clean slate, and an exhausted retry fails loudly.
