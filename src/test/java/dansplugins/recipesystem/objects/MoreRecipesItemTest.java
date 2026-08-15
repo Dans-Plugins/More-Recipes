@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,7 +34,7 @@ class MoreRecipesItemTest {
         Set<String> seen = new HashSet<>();
 
         for (String itemName : MoreRecipesItem.getItemNames()) {
-            assertTrue(seen.add(itemName.toLowerCase()), itemName + " appears in the catalog more than once");
+            assertTrue(seen.add(itemName.toLowerCase(Locale.ROOT)), itemName + " appears in the catalog more than once");
         }
     }
 
