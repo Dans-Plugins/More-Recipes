@@ -12,6 +12,7 @@ import org.bukkit.UnsafeValues;
 import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -45,11 +46,15 @@ import static org.mockito.Mockito.when;
  * Exercises recipe registration against a stub server and inspects the recipe objects that reach
  * {@code Bukkit.addRecipe}.
  *
- * A malformed recipe — a shape row of the wrong width, or a shape character that was never given an
- * ingredient — compiles, registers without complaint and is then rejected when the server loads the
- * plugin, leaving the item uncraftable with nothing in the log a player would ever see. Asserting on
- * the registered recipe is therefore the only place that failure can be caught before a server runs
- * the build.
+ * The failures these tests exist to catch leave no trace at build time. A shape character that was
+ * never given an ingredient becomes an empty slot rather than an error; a key shared by two recipes
+ * makes the server keep only one of them; a catalog entry wired to another item's class registers a
+ * perfectly good recipe for the wrong item; a registrar that registers nothing leaves the item
+ * uncraftable. None of these fail the build, and a player sees only a recipe that does not work.
+ *
+ * A shape that is not rectangular, or that has too many rows or columns, is the exception: Bukkit
+ * rejects those itself, when the recipe is built. They are asserted below anyway, as a statement of
+ * the shape Bukkit accepts, but they are not what these tests are for.
  */
 class RecipeRegistryTest {
 
@@ -94,8 +99,8 @@ class RecipeRegistryTest {
     }
 
     /**
-     * The check the compiler cannot make: every registered shape is a rectangle Bukkit accepts, and
-     * every slot the shape asks for has something to put in it.
+     * The check neither the compiler nor Bukkit makes: every slot a shape asks for has something to
+     * put in it.
      */
     @Test
     void registerRecipes_registersOnlyWellFormedShapedRecipes() {
@@ -149,8 +154,8 @@ class RecipeRegistryTest {
     }
 
     /**
-     * Asserts the properties Bukkit requires of a shaped recipe but only enforces once the server
-     * loads it.
+     * Asserts the properties of a well-formed shaped recipe. The one Bukkit does not check for
+     * itself is the last: an unmapped shape character is silently an empty slot, not an error.
      * @param recipe The registered recipe.
      */
     private static void assertWellFormed(ShapedRecipe recipe) {
@@ -165,7 +170,7 @@ class RecipeRegistryTest {
             assertEquals(width, row.length(), description + " has rows of differing widths");
         }
 
-        Map<Character, ItemStack> ingredients = recipe.getIngredientMap();
+        Map<Character, RecipeChoice> ingredients = recipe.getChoiceMap();
         int filledSlots = 0;
         for (String row : shape) {
             for (char slot : row.toCharArray()) {
