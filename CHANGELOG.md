@@ -18,6 +18,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
+- The plugin now reports usage events — `startup` on enable, `command` on each of its commands — to the author's trace server so it is known which plugins are in use. Events carry the plugin name, the event name, and the plugin version or command name; nothing about players or the server. Reporting runs off the main thread, never delays a tick, drops silently when the server is unreachable, and is turned off with `usage-reporting.enabled: false` in `config.yml`. The plugin did not have a `config.yml` before; one is now written to `plugins/More-Recipes/` on first run, carrying the plugin's key, so reporting is active out of the box unless turned off — including on servers that already have a `config.yml` without the `usage-reporting` block, since the plugin reads the bundled defaults for any key the file lacks
+
 - A `Dev Release` workflow, which republishes a rolling `dev` prerelease of `main` on every non-documentation push. This is what Dan's Plugin Manager's experimental channel installs from: `/dpm get morerecipes --experimental` reads `releases/tags/dev`, so without it there is nothing for that command to download. The prerelease is unreleased, unreviewed code and is marked as such.
 
 ## [2.0.0-SNAPSHOT-8-8-2026] – 2026-08-08
