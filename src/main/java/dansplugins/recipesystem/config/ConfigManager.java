@@ -1,8 +1,11 @@
 package dansplugins.recipesystem.config;
 
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ConfigManager {
+    private static final String USAGE_REPORTING_SECTION = "usage-reporting";
     private static final String USAGE_REPORTING_ENABLED_KEY = "usage-reporting.enabled";
     private static final String USAGE_REPORTING_ENDPOINT_KEY = "usage-reporting.endpoint";
     private static final String USAGE_REPORTING_KEY_KEY = "usage-reporting.key";
@@ -16,6 +19,29 @@ public class ConfigManager {
 
     public void saveDefaultConfig() {
         plugin.saveDefaultConfig();
+    }
+
+    /**
+     * Writes the usage-reporting block into {@code config.yml} when the file on disk has none,
+     * taking the values from the bundled defaults, so the opt-out is visible on a server that
+     * was upgraded from a version before usage reporting. {@code saveDefaultConfig()} never
+     * touches an existing file, and the one-argument getters above read the bundled defaults
+     * silently, which is exactly why the switch was invisible. Runs at most once per
+     * installation: a file that already has the block is left alone.
+     */
+    public void writeUsageReportingBlockIfMissing() {
+        FileConfiguration config = plugin.getConfig();
+        if (config.isSet(USAGE_REPORTING_SECTION)) {
+            return;
+        }
+        Configuration defaults = config.getDefaults();
+        if (defaults == null) {
+            return;
+        }
+        config.set(USAGE_REPORTING_ENABLED_KEY, defaults.get(USAGE_REPORTING_ENABLED_KEY));
+        config.set(USAGE_REPORTING_ENDPOINT_KEY, defaults.get(USAGE_REPORTING_ENDPOINT_KEY));
+        config.set(USAGE_REPORTING_KEY_KEY, defaults.get(USAGE_REPORTING_KEY_KEY));
+        plugin.saveConfig();
     }
 
     // The one-argument getters, deliberately. saveDefaultConfig() never touches a

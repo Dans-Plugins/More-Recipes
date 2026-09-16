@@ -35,6 +35,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
     public void onEnable() {
         // writes the bundled config.yml on first run; never overwrites an existing one
         configManager.saveDefaultConfig();
+        configManager.writeUsageReportingBlockIfMissing();
 
         recipeRegistry.registerRecipes();
         handlebStatsIntegration();
@@ -44,9 +45,23 @@ public final class MoreRecipes extends PonderBukkitPlugin {
         trace = TraceClient.builder(configManager.getUsageReportingEndpoint(), getName())
                 .key(configManager.getUsageReportingKey())
                 .enabled(configManager.isUsageReportingEnabled())
+                .serverWideConfig(getDataFolder().getParentFile())
                 .logger(getLogger())
                 .build();
+        announceUsageReporting();
         trace.report("startup", null, Collections.singletonMap("version", getDescription().getVersion()));
+    }
+
+    /**
+     * The startup line that says, on every enable, whether usage reporting is on and how to turn it
+     * off, or why it is off. The reason comes from the client so it matches what it actually did.
+     */
+    private void announceUsageReporting() {
+        if (trace.isEnabled()) {
+            getLogger().info("Usage reporting is on: " + getName() + " sends its name, version and command names to https://trace.danielstephenson.dev - nothing about players or the server. Turn it off with usage-reporting.enabled: false in this plugin's config.yml, or for every plugin with enabled: false in plugins/trace/config.yml. Details: https://github.com/Stephenson-Software/trace#usage-reporting");
+        } else {
+            getLogger().info("Usage reporting is off (" + trace.disabledReason() + ").");
+        }
     }
 
     @Override
