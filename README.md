@@ -1,6 +1,18 @@
 # What is this?
 This Minecraft plugin adds static recipes for items that are not craftable in vanilla Minecraft.
 
+## Usage reporting
+
+Usage reporting is on by default: More-Recipes sends its name, version and command names (a `startup` event when it enables and a `command` event each time one of its commands is used) to <https://trace.danielstephenson.dev> so it is known which plugins are actually in use. Nothing about players, worlds, IPs or the server is sent, and nothing typed after a command is sent either.
+
+To turn it off:
+
+- for this plugin: `usage-reporting.enabled: false` in `plugins/More-Recipes/config.yml`
+- for every plugin on the server that reports this way: `enabled: false` in `plugins/trace/config.yml` (created the first time such a plugin enables)
+- for the whole server process: the environment variable `TRACE_USAGE_REPORTING=off` or `DO_NOT_TRACK=1`
+
+Each startup logs whether reporting is on or, if it is off, why. Details: <https://github.com/Stephenson-Software/trace#usage-reporting>
+
 ## License
 
 This project is licensed under the [GNU General Public License v3.0](LICENSE) (GPL-3.0).

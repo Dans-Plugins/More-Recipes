@@ -1,9 +1,12 @@
 package dansplugins.recipesystem.config;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.StringReader;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -72,5 +75,51 @@ class ConfigManagerTest {
         assertFalse(configManager.isUsageReportingEnabled());
         assertEquals("http://localhost:8080", configManager.getUsageReportingEndpoint());
         assertEquals("abc", configManager.getUsageReportingKey());
+    }
+
+    // The block-on-disk half of the upgrade story, against a real YamlConfiguration so
+    // isSet() and getDefaults() behave as they do on a server, not as a mock says.
+
+    @Test
+    void writeUsageReportingBlockIfMissing_copiesTheBundledValuesAndSavesWhenTheFileHasNoBlock() {
+        YamlConfiguration onDisk = YamlConfiguration.loadConfiguration(new StringReader("debugMode: false\n"));
+        onDisk.setDefaults(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint: https://trace.danielstephenson.dev\n  key: bundled-key\n")));
+        when(plugin.getConfig()).thenReturn(onDisk);
+
+        configManager.writeUsageReportingBlockIfMissing();
+
+        verify(plugin).saveConfig();
+        YamlConfiguration reloaded = YamlConfiguration.loadConfiguration(new StringReader(onDisk.saveToString()));
+        assertTrue(reloaded.isSet("usage-reporting.enabled"), "the block must now be in the file itself, not only in the defaults");
+        assertTrue(reloaded.getBoolean("usage-reporting.enabled"));
+        assertEquals("https://trace.danielstephenson.dev", reloaded.getString("usage-reporting.endpoint"));
+        assertEquals("bundled-key", reloaded.getString("usage-reporting.key"));
+        assertFalse(reloaded.getBoolean("debugMode"), "what was already there is kept");
+    }
+
+    @Test
+    void writeUsageReportingBlockIfMissing_leavesAFileThatAlreadyHasTheBlockAlone() {
+        YamlConfiguration onDisk = YamlConfiguration.loadConfiguration(new StringReader("usage-reporting:\n  enabled: false\n"));
+        onDisk.setDefaults(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint: https://trace.danielstephenson.dev\n  key: bundled-key\n")));
+        when(plugin.getConfig()).thenReturn(onDisk);
+
+        configManager.writeUsageReportingBlockIfMissing();
+
+        verify(plugin, never()).saveConfig();
+        assertFalse(onDisk.getBoolean("usage-reporting.enabled"), "an operator's opt-out is not overwritten");
+        assertFalse(onDisk.isSet("usage-reporting.key"), "nothing is added to a file that has the block");
+    }
+
+    @Test
+    void writeUsageReportingBlockIfMissing_doesNothingWithoutBundledDefaults() {
+        YamlConfiguration onDisk = YamlConfiguration.loadConfiguration(new StringReader("debugMode: false\n"));
+        when(plugin.getConfig()).thenReturn(onDisk);
+
+        configManager.writeUsageReportingBlockIfMissing();
+
+        verify(plugin, never()).saveConfig();
+        assertFalse(onDisk.isSet("usage-reporting"));
     }
 }
