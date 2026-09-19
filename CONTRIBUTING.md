@@ -49,17 +49,15 @@ Issues are grouped into [milestones](https://github.com/Dans-Plugins/More-Recipe
 
 ## Testing
 
-Run the build with:
+Run the unit tests with:
 
-Linux / macOS:
+    mvn test
 
-    mvn clean package
+The tests live under `src/test/java/dansplugins/recipesystem/`, mirroring the package of the class they cover (`commands/GetCommandTest.java` covers `commands/GetCommand.java`, and so on). They use JUnit 5, with Mockito standing in for Bukkit collaborators (a stub `Server` where the code reaches for `Bukkit` statically); no Spigot server is started. Add or update a test for every behaviour change, and put it in the mirrored package.
 
-Windows:
+`mvn clean package` also runs the suite before building the JAR, and the `Build` workflow runs the same command on every pull request, so a failing test blocks CI.
 
-    mvn clean package
-
-For manual testing, place the built JAR from `target/` into a local Spigot server's `plugins` folder and restart the server.
+Some things can only be checked on a real server — recipe registration is accepted without complaint at startup even when a recipe is malformed, and the tests inspect what is handed to the server rather than crafting with it. For manual testing, place the built JAR from `target/` into a local Spigot server's `plugins` folder and restart the server.
 
 ## Questions
 
