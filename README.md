@@ -1,6 +1,14 @@
 # What is this?
 This Minecraft plugin adds static recipes for items that are not craftable in vanilla Minecraft.
 
+## Documentation
+
+- [User Guide](USER_GUIDE.md) — installation, the items that gain recipes, and the permissions table
+- [Commands](COMMANDS.md) — every `/mr` command and the permission it needs
+- [Configuration](CONFIG.md) — every `config.yml` key
+- [Contributing](CONTRIBUTING.md) — building, testing, and opening a pull request
+- [Changelog](CHANGELOG.md)
+
 ## Usage reporting
 
 Usage reporting is on by default: More-Recipes sends its name, version and command names (a `startup` event when it enables and a `command` event each time one of its commands is used) to <https://trace.danielstephenson.dev> so it is known which plugins are actually in use. Nothing about players, worlds, IPs or the server is sent, and nothing typed after a command is sent either.
