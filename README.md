@@ -1,6 +1,10 @@
 # What is this?
 This Minecraft plugin adds static recipes for items that are not craftable in vanilla Minecraft.
 
+## Download
+- [SpigotMC](https://www.spigotmc.org/resources/more-recipes.81832/)
+- [GitHub releases](https://github.com/Dans-Plugins/More-Recipes/releases)
+
 ## Documentation
 
 - [User Guide](USER_GUIDE.md) — installation, the items that gain recipes, and the permissions table
