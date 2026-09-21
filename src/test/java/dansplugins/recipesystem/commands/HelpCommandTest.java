@@ -23,7 +23,7 @@ class HelpCommandTest {
         verify(console).sendMessage(contains("=== More Recipes Commands ==="));
         verify(console).sendMessage(contains("/mr help"));
         verify(console).sendMessage(contains("/mr list"));
-        verify(console).sendMessage(contains("/mr get"));
+        verify(console).sendMessage(contains("/mr get (name) (amount) - Get a certain amount of a specified item."));
         verify(console, never()).sendMessage(contains("can't be used in the console"));
     }
 
