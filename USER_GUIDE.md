@@ -37,7 +37,7 @@ Use `/mr list` in-game to see all available items.
 
 ## Getting Items Directly
 
-Operators can use `/mr get <itemName> <amount>` to give themselves a specific item without crafting it.
+Operators can use `/mr get <itemName> <amount>` in-game to give themselves a specific item without crafting it. The command can't be run from the server console.
 
 ## Permissions
 
