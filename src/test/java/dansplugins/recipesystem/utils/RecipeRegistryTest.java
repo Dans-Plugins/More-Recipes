@@ -23,8 +23,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.objenesis.ObjenesisStd;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -151,6 +157,90 @@ class RecipeRegistryTest {
                     item.getItemName() + " registered a recipe yielding a different item");
             assertTrue(result.getAmount() > 0, item.getItemName() + " registered a recipe yielding nothing");
         }
+    }
+
+    /**
+     * Guards the recipe table in {@code USER_GUIDE.md}, the only place a player can learn what a
+     * recipe asks for. It cannot be generated from the registrars, so a changed ingredient, shape or
+     * yield would otherwise leave the guide describing a recipe the server no longer accepts.
+     */
+    @Test
+    void userGuide_documentsEveryRecipeAsRegistered() throws IOException {
+        Map<String, List<String>> documented = recipesDocumentedInUserGuide();
+        assertEquals(MoreRecipesItem.getItemNames(), new ArrayList<>(documented.keySet()));
+
+        for (MoreRecipesItem item : MoreRecipesItem.values()) {
+            clearInvocations(server);
+
+            item.registerRecipe(itemStackService, moreRecipes);
+
+            Recipe recipe = registeredRecipes().get(0);
+            assertTrue(recipe instanceof ShapedRecipe, describe(recipe) + " is not a shaped recipe, which the guide's table assumes");
+            assertEquals(asDocumented((ShapedRecipe) recipe), documented.get(item.getItemName()),
+                    "USER_GUIDE.md does not describe the recipe " + item.getItemName() + " registers");
+        }
+    }
+
+    /**
+     * @param recipe The registered recipe.
+     * @return The recipe as a row of the guide's table would put it: one cell per shape row, naming
+     *         each slot's ingredient or {@code —} for an empty slot, followed by the amount it yields.
+     */
+    private static List<String> asDocumented(ShapedRecipe recipe) {
+        Map<Character, ItemStack> ingredients = recipe.getIngredientMap();
+        List<String> cells = new ArrayList<>();
+        for (String row : recipe.getShape()) {
+            List<String> slots = new ArrayList<>();
+            for (char slot : row.toCharArray()) {
+                ItemStack ingredient = ingredients.get(slot);
+                slots.add(ingredient == null ? "—" : displayName(ingredient.getType()));
+            }
+            cells.add(String.join(", ", slots));
+        }
+        cells.add(String.valueOf(recipe.getResult().getAmount()));
+        return cells;
+    }
+
+    /**
+     * @param material An ingredient's material.
+     * @return The material's name in the guide's wording: {@code IRON_BARS} becomes {@code Iron Bars}.
+     */
+    private static String displayName(Material material) {
+        List<String> words = new ArrayList<>();
+        for (String word : material.name().toLowerCase(Locale.ROOT).split("_")) {
+            words.add(Character.toUpperCase(word.charAt(0)) + word.substring(1));
+        }
+        return String.join(" ", words);
+    }
+
+    /**
+     * Reads the rows of the table under the user guide's "Recipes" heading.
+     * @return Each documented item name, in the order it appears, mapped to the rest of its row.
+     * @throws IOException If the user guide cannot be read.
+     */
+    private static Map<String, List<String>> recipesDocumentedInUserGuide() throws IOException {
+        File userGuide = new File("USER_GUIDE.md");
+        assertTrue(userGuide.isFile(), "USER_GUIDE.md was not found at " + userGuide.getAbsolutePath());
+
+        Map<String, List<String>> recipes = new LinkedHashMap<>();
+        boolean inRecipes = false;
+        for (String line : Files.readAllLines(userGuide.toPath(), StandardCharsets.UTF_8)) {
+            if (line.startsWith("## ")) {
+                inRecipes = line.trim().equals("## Recipes");
+                continue;
+            }
+            if (!inRecipes || !line.startsWith("| ")) {
+                continue;
+            }
+            List<String> cells = new ArrayList<>();
+            for (String cell : line.trim().substring(1).split("\\|")) {
+                cells.add(cell.trim());
+            }
+            if (!cells.get(0).equals("Item")) {
+                recipes.put(cells.get(0), cells.subList(1, cells.size()));
+            }
+        }
+        return recipes;
     }
 
     /**

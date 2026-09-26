@@ -35,6 +35,33 @@ The following items gain crafting recipes. Each name below is also the name `/mr
 
 Use `/mr list` in-game to see all available items.
 
+## Recipes
+
+Every recipe is shaped: the ingredients go in a crafting table's 3×3 grid laid out as below. Each
+row cell lists that row's three slots from left to right, and `—` is a slot left empty. Grass is the
+short grass plant, not a grass block.
+
+| Item | Top row | Middle row | Bottom row | Yields |
+|------|---------|------------|------------|--------|
+| BlazeRod | Iron Block, Lava Bucket, Iron Block | Iron Block, Lava Bucket, Iron Block | Iron Block, Lava Bucket, Iron Block | 1 |
+| ChainmailBoots | —, —, — | Iron Bars, —, Iron Bars | Iron Bars, —, Iron Bars | 1 |
+| ChainmailChestplate | Iron Bars, —, Iron Bars | Iron Bars, Iron Bars, Iron Bars | Iron Bars, Iron Bars, Iron Bars | 1 |
+| ChainmailHelmet | Iron Bars, Iron Bars, Iron Bars | Iron Bars, —, Iron Bars | —, —, — | 1 |
+| ChainmailLeggings | Iron Bars, Iron Bars, Iron Bars | Iron Bars, —, Iron Bars | Iron Bars, —, Iron Bars | 1 |
+| Cobweb | String, —, String | —, String, — | String, —, String | 1 |
+| DiamondHorseArmor | Diamond, Diamond, Diamond | Diamond, Diamond, Diamond | String, —, String | 1 |
+| GoldenHorseArmor | Gold Ingot, Gold Ingot, Gold Ingot | Gold Ingot, Gold Ingot, Gold Ingot | String, —, String | 1 |
+| GrassBlock | —, —, — | —, Grass, — | —, Dirt, — | 1 |
+| Gunpowder | Sand, Gravel, Sand | Gravel, Sand, Gravel | Sand, Gravel, Sand | 1 |
+| IronHorseArmor | Iron Ingot, Iron Ingot, Iron Ingot | Iron Ingot, Iron Ingot, Iron Ingot | String, —, String | 1 |
+| Lead | String, String, — | String, Iron Block, — | —, —, String | 1 |
+| NameTag | Paper, Paper, — | Paper, Paper, — | —, —, String | 1 |
+| PrismarineShard | Kelp, —, Kelp | Brick, Iron Nugget, Brick | Brick, Iron Nugget, Brick | 8 |
+| Saddle | Leather, Leather, Leather | Leather, —, Leather | Iron Block, —, Iron Block | 1 |
+| SlimeBall | Kelp, Kelp, Kelp | Kelp, Water Bucket, Kelp | Kelp, Kelp, Kelp | 1 |
+| String | Grass, Grass, — | —, Grass, — | —, Grass, Grass | 1 |
+| TotemOfUndying | —, Diamond, — | Diamond Block, Diamond Block, Diamond Block | Emerald, Diamond Block, Emerald | 1 |
+
 ## Getting Items Directly
 
 Operators can use `/mr get <itemName> <amount>` in-game to give themselves a specific item without crafting it. The command can't be run from the server console.

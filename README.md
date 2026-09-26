@@ -7,7 +7,7 @@ This Minecraft plugin adds static recipes for items that are not craftable in va
 
 ## Documentation
 
-- [User Guide](USER_GUIDE.md) — installation, the items that gain recipes, and the permissions table
+- [User Guide](USER_GUIDE.md) — installation, the items that gain recipes and what each recipe takes, and the permissions table
 - [Commands](COMMANDS.md) — every `/mr` command and the permission it needs
 - [Configuration](CONFIG.md) — every `config.yml` key
 - [Contributing](CONTRIBUTING.md) — building, testing, and opening a pull request
