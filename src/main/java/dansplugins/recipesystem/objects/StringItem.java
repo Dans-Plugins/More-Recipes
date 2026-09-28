@@ -2,6 +2,7 @@ package dansplugins.recipesystem.objects;
 
 import dansplugins.recipesystem.MoreRecipes;
 import dansplugins.recipesystem.services.ItemStackService;
+import dansplugins.recipesystem.utils.RenamedConstants;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -27,7 +28,7 @@ public class StringItem {
         NamespacedKey key = new NamespacedKey(moreRecipes, "more_recipes_string");
         ShapedRecipe recipe = new ShapedRecipe(key, getItemStack(1));
         recipe.shape("GG0", "0G0", "0GG");
-        recipe.setIngredient('G', Material.GRASS);
+        recipe.setIngredient('G', RenamedConstants.shortGrass());
         Bukkit.addRecipe(recipe);
     }
 
