@@ -42,14 +42,14 @@ public final class MoreRecipes extends PonderBukkitPlugin {
         initializeCommandService();
 
         // usage reporting: one event now, one per command; see config.yml
-        trace = TraceClient.builder(configManager.getUsageReportingEndpoint(), getName())
+        trace = TraceClient.builder(configManager.getUsageReportingEndpoint(), getName(), getDescription().getVersion())
                 .key(configManager.getUsageReportingKey())
                 .enabled(configManager.isUsageReportingEnabled())
                 .serverWideConfig(getDataFolder().getParentFile())
                 .logger(getLogger())
                 .build();
         announceUsageReporting();
-        trace.report("startup", null, Collections.singletonMap("version", getDescription().getVersion()));
+        trace.report("startup");
     }
 
     /**
