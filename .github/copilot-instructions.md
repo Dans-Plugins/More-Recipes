@@ -16,7 +16,7 @@ making any changes.
 - `src/main/java/dansplugins/recipesystem/` – Plugin source code
 - `src/main/java/dansplugins/recipesystem/commands/` – Command handlers
 - `src/main/java/dansplugins/recipesystem/objects/` – Recipe definitions (one class per item)
-- `src/main/resources/` – `plugin.yml`
+- `src/main/resources/` – `plugin.yml` and the bundled `config.yml`
 
 ## Coding Conventions
 
