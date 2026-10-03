@@ -1,6 +1,7 @@
 package dansplugins.recipesystem.commands;
 
 import dansplugins.recipesystem.services.ItemStackService;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -141,5 +142,57 @@ class GetCommandTest {
         assertTrue(result);
         verify(inventory).addItem(itemStack);
         verify(player).sendMessage(contains("Saddle created."));
+    }
+
+    @Test
+    void execute_fromConsole_isRefusedWithoutLookingUpItem() {
+        ItemStackService itemStackService = mock(ItemStackService.class);
+        GetCommand getCommand = new GetCommand(itemStackService);
+        ConsoleCommandSender console = mock(ConsoleCommandSender.class);
+
+        boolean result = getCommand.execute(console, new String[]{"Saddle", "5"});
+
+        assertFalse(result);
+        verify(console).sendMessage("This command can't be used in the console.");
+        verify(itemStackService, never()).getItemStack(anyString(), anyInt());
+    }
+
+    @Test
+    void execute_withNoArguments_sendsTheUsage() {
+        GetCommand getCommand = new GetCommand(mock(ItemStackService.class));
+        Player player = mock(Player.class);
+
+        boolean result = getCommand.execute(player);
+
+        assertFalse(result);
+        verify(player).sendMessage(contains("Usage: /morerecipes get (itemName) (amount)"));
+    }
+
+    @Test
+    void execute_withoutAnAmount_sendsTheUsageWithoutLookingUpItem() {
+        ItemStackService itemStackService = mock(ItemStackService.class);
+        GetCommand getCommand = new GetCommand(itemStackService);
+        Player player = mock(Player.class);
+
+        boolean result = getCommand.execute(player, new String[]{"Saddle"});
+
+        assertFalse(result);
+        verify(player).sendMessage(contains("Usage: /morerecipes get (itemName) (amount)"));
+        verify(itemStackService, never()).getItemStack(anyString(), anyInt());
+    }
+
+    @Test
+    void execute_withUnknownItem_saysSoAndGivesNothing() {
+        ItemStackService itemStackService = mock(ItemStackService.class);
+        when(itemStackService.getItemStack("Diamond", 5)).thenReturn(null);
+
+        GetCommand getCommand = new GetCommand(itemStackService);
+        Player player = mock(Player.class);
+
+        boolean result = getCommand.execute(player, new String[]{"Diamond", "5"});
+
+        assertFalse(result);
+        verify(player).sendMessage(contains("That isn't an item in More Recipes!"));
+        verify(player, never()).getInventory();
     }
 }
