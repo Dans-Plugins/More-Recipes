@@ -8,6 +8,18 @@ This plugin is supported on the Minecraft versions listed in [`minecraft-version
 - [SpigotMC](https://www.spigotmc.org/resources/more-recipes.81832/)
 - [GitHub releases](https://github.com/Dans-Plugins/More-Recipes/releases)
 
+## Works Well With
+More Recipes is part of the **survival flavour** set of Dan's Plugins. These are companion plugins that suit the same kind of server and run side by side; More Recipes does not depend on or call into any of them.
+
+- [Food Spoilage](https://github.com/Dans-Plugins/FoodSpoilage) ([SpigotMC](https://www.spigotmc.org/resources/food-spoilage.81507/), `/dpm get foodspoilage`): food goes bad over time.
+- [Wild Pets](https://github.com/Dans-Plugins/Wild-Pets) ([SpigotMC](https://www.spigotmc.org/resources/wild-pets.95800/), `/dpm get wildpets`): players tame any entity and keep it as a pet.
+- [SimpleSkills](https://github.com/Dans-Plugins/SimpleSkills) ([SpigotMC](https://www.spigotmc.org/resources/simpleskills.98039/), `/dpm get simpleskills`): skills that level up as players play and unlock benefits.
+- [Medieval Cookery](https://github.com/Dans-Plugins/Medieval-Cookery) (no SpigotMC page, no stable release yet): cooking recipes for custom foods, defined by the server owner.
+
+Running a medieval roleplay server? The [Medieval Roleplay Engine](https://github.com/Dans-Plugins/Medieval-Roleplay-Engine#works-well-with) set lists the plugins for that.
+
+Every plugin above is listed on [dansplugins.com](https://dansplugins.com). More Recipes is listed at [dansplugins.com/resources/more-recipes](https://dansplugins.com/resources/more-recipes) and can be installed in game with [Dan's Plugin Manager](https://github.com/Dans-Plugins/Dans-Plugin-Manager): `/dpm get morerecipes`.
+
 ## Documentation
 
 - [User Guide](USER_GUIDE.md) — installation, the items that gain recipes and what each recipe takes, and the permissions table
