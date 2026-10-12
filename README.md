@@ -22,7 +22,7 @@ Every plugin above is listed on [dansplugins.com](https://dansplugins.com). More
 
 ## Documentation
 
-- [User Guide](USER_GUIDE.md) — installation, the items that gain recipes and what each recipe takes, and the permissions table
+- [User Guide](USER_GUIDE.md) — installation, the items that gain recipes and what each recipe takes, the permissions table, and what the config file controls
 - [Commands](COMMANDS.md) — every `/mr` command and the permission it needs
 - [Configuration](CONFIG.md) — every `config.yml` key
 - [Contributing](CONTRIBUTING.md) — building, testing, and opening a pull request

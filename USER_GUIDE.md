@@ -64,7 +64,7 @@ short grass plant, not a grass block.
 
 ## Getting Items Directly
 
-Operators can use `/mr get <itemName> <amount>` in-game to give themselves a specific item without crafting it. The command can't be run from the server console.
+Players with the `morerecipes.get` permission (operators, by default) can use `/mr get <itemName> <amount>` in-game to give themselves a specific item without crafting it. The command can't be run from the server console.
 
 ## Permissions
 
@@ -73,6 +73,13 @@ Operators can use `/mr get <itemName> <amount>` in-game to give themselves a spe
 | `morerecipes.help` | `true` | View the help menu. |
 | `morerecipes.listitems` | `true` | List craftable items. |
 | `morerecipes.get` | `op` | Use `/mr get` to receive items directly. |
+
+## Configuration
+
+On first run the plugin writes `plugins/More-Recipes/config.yml`. Recipes are not configurable; the
+file only controls usage reporting, which is on by default and is turned off with
+`usage-reporting.enabled: false`. See [CONFIG.md](CONFIG.md) for every key, what is sent and the
+other ways to turn it off.
 
 ## Support
 
