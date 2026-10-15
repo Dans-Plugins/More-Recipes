@@ -1,9 +1,11 @@
 package dansplugins.recipesystem;
 
+import dansplugins.recipesystem.services.ItemStackService;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.junit.jupiter.api.Test;
+import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,12 +15,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 
 /**
  * Guards the copies of {@code plugin.yml}'s permission declarations carried by the documentation.
@@ -26,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * {@code plugin.yml} is what the server reads, so a node renamed or re-defaulted there takes effect
  * with no build-time signal, while the permissions table in {@code USER_GUIDE.md} and the permission
  * column in {@code COMMANDS.md} — what a server operator writes their permission configuration
- * from — go on describing the old node.
+ * from — go on describing the old node. The same holds for the node each registered command checks.
  */
 class PluginDescriptionTest {
 
@@ -44,6 +48,26 @@ class PluginDescriptionTest {
     @Test
     void commandsReference_namesExactlyThePermissionsDeclared() throws IOException {
         assertEquals(new TreeSet<>(declaredPermissionDefaults().keySet()), permissionsNamedInCommandsReference());
+    }
+
+    /**
+     * The permission each command checks is what the server enforces, so a node missing from
+     * {@code plugin.yml} is one no operator can find documented; {@code /mr list} once checked the
+     * undeclared {@code morerecipes.list}. {@link dansplugins.recipesystem.commands.DefaultCommand}'s
+     * {@code morerecipes.default} is not covered, since it is not registered here; see #187.
+     */
+    @Test
+    void registeredCommands_checkOnlyDeclaredPermissions() throws IOException {
+        Set<String> declared = declaredPermissionDefaults().keySet();
+
+        List<AbstractPluginCommand> commands = MoreRecipes.createCommands(mock(ItemStackService.class));
+        assertFalse(commands.isEmpty(), "no commands are registered");
+        for (AbstractPluginCommand command : commands) {
+            for (String permission : command.getPermissions()) {
+                assertTrue(declared.contains(permission),
+                        command.getClass().getSimpleName() + " checks " + permission + ", which plugin.yml does not declare");
+            }
+        }
     }
 
     /**

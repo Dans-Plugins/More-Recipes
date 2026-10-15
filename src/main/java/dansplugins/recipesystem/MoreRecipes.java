@@ -100,11 +100,20 @@ public final class MoreRecipes extends PonderBukkitPlugin {
      * Initializes Ponder's command service with the plugin's commands.
      */
     private void initializeCommandService() {
-        ArrayList<AbstractPluginCommand> commands = new ArrayList<AbstractPluginCommand>(Arrays.asList(
+        commandService.initialize(createCommands(itemStackService), "That command wasn't found.");
+    }
+
+    /**
+     * The sub-commands registered with Ponder's command service. Bare {@code /mr} is handled
+     * separately, by {@link DefaultCommand} in {@link #onCommand}.
+     * @param itemStackService The service {@link GetCommand} builds items with.
+     * @return A new instance of each registered command.
+     */
+    static ArrayList<AbstractPluginCommand> createCommands(ItemStackService itemStackService) {
+        return new ArrayList<AbstractPluginCommand>(Arrays.asList(
                 new HelpCommand(),
                 new GetCommand(itemStackService),
                 new ListCommand()
         ));
-        commandService.initialize(commands, "That command wasn't found.");
     }
 }
