@@ -30,7 +30,7 @@ import static org.mockito.Mockito.mock;
  * {@code plugin.yml} is what the server reads, so a node renamed or re-defaulted there takes effect
  * with no build-time signal, while the permissions table in {@code USER_GUIDE.md} and the permission
  * column in {@code COMMANDS.md} — what a server operator writes their permission configuration
- * from — go on describing the old node.
+ * from — go on describing the old node. The same holds for the node each registered command checks.
  */
 class PluginDescriptionTest {
 
