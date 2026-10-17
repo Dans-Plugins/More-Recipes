@@ -40,14 +40,14 @@ class DefaultCommandTest {
     }
 
     @Test
-    void execute_sendsTheCreditsAndWikiLines() {
+    void execute_sendsTheCreditsAndUserGuideLines() {
         DefaultCommand defaultCommand = new DefaultCommand(moreRecipes);
         CommandSender sender = mock(CommandSender.class);
 
         defaultCommand.execute(sender);
 
         verify(sender).sendMessage(contains("Developed by: Daniel McCoy Stephenson, Rykurock"));
-        verify(sender).sendMessage(contains("Wiki: https://github.com/Dans-Plugins/More-Recipes/wiki"));
+        verify(sender).sendMessage(contains("User Guide: https://github.com/Dans-Plugins/More-Recipes/blob/main/USER_GUIDE.md"));
         verify(sender, times(3)).sendMessage(anyString());
     }
 
@@ -73,7 +73,7 @@ class DefaultCommandTest {
         assertTrue(result);
         verify(sender).sendMessage(contains("More Recipes " + VERSION));
         verify(sender).sendMessage(contains("Developed by: Daniel McCoy Stephenson, Rykurock"));
-        verify(sender).sendMessage(contains("Wiki: https://github.com/Dans-Plugins/More-Recipes/wiki"));
+        verify(sender).sendMessage(contains("User Guide: https://github.com/Dans-Plugins/More-Recipes/blob/main/USER_GUIDE.md"));
         verify(sender, times(3)).sendMessage(anyString());
     }
 

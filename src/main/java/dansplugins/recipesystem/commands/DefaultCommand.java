@@ -23,7 +23,7 @@ public class DefaultCommand extends AbstractPluginCommand {
     public boolean execute(CommandSender commandSender) {
         commandSender.sendMessage(ChatColor.AQUA + "More Recipes " + moreRecipes.getVersion());
         commandSender.sendMessage(ChatColor.AQUA + "Developed by: Daniel McCoy Stephenson, Rykurock");
-        commandSender.sendMessage(ChatColor.AQUA + "Wiki: https://github.com/Dans-Plugins/More-Recipes/wiki");
+        commandSender.sendMessage(ChatColor.AQUA + "User Guide: https://github.com/Dans-Plugins/More-Recipes/blob/main/USER_GUIDE.md");
         return true;
     }
 
