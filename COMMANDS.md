@@ -4,7 +4,7 @@ All commands use `/mr` or `/morerecipes` as the base.
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/mr` | Show the plugin version, the authors and a link to the wiki. | None |
+| `/mr` | Show the plugin version, the authors and a link to the [user guide](USER_GUIDE.md). | None |
 | `/mr help` | View a list of commands. | `morerecipes.help` |
 | `/mr list` | List all items that can be crafted with More Recipes. | `morerecipes.listitems` |
 | `/mr get <itemName> <amount>` | Give yourself a specified amount of a More Recipes item. Players only; the console is refused. | `morerecipes.get` |
