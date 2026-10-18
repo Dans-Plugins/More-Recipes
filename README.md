@@ -1,4 +1,9 @@
 # What is this?
+
+![/mr list showing the 18 items More Recipes makes craftable](docs/images/recipe-list.png)
+
+*Real in-game output from More Recipes 1.7.0 on a local throwaway Paper 1.21.11 test server: the commands were typed by a scripted bot client, and the chat it received is drawn as Minecraft-style chat (typed commands appear in the input bars; grey lines say what happened between commands).*
+
 This Minecraft plugin adds static recipes for items that are not craftable in vanilla Minecraft.
 
 ## Supported Minecraft Versions
