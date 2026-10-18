@@ -3,10 +3,11 @@
 # command name on use) is sent to the author's trace server so it is known which
 # plugins are actually in use. Each event also carries a random server ID (the
 # server-id line in plugins/trace/config.yml) so servers can be counted; it
-# identifies no person, account or IP address. Nothing about players is
-# included. Sending happens off the main thread, never blocks a tick, and is
-# dropped silently if the server cannot be reached. Set enabled to false to turn
-# it off.
+# identifies no person, account or IP address. Any tags set in a tags: block
+# of that same file are sent too (there are none unless added there). Nothing
+# about players is included. Sending happens off the main thread, never blocks
+# a tick, and is dropped silently if the server cannot be reached. Set enabled
+# to false to turn it off.
 #
 # Other ways to turn it off:
 #   - Server-wide, for every plugin that reports to trace: set enabled to
