@@ -34,7 +34,8 @@ Usage reporting is on by default: More-Recipes sends its name, version and comma
 
 Each event also carries a random server ID (the `server-id` line in `plugins/trace/config.yml`) so
 servers can be counted rather than events. It identifies no person, account or IP address; delete
-the line to get a new one.
+the line to get a new one. Any tags the server owner sets in a `tags:` block of that file (for
+example `ci: "true"` on a test server) are added to every event as well; there are none by default.
 
 To turn it off:
 
