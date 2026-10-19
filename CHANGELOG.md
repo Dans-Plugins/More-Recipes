@@ -28,6 +28,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Fixed
 
+- The startup notice logged when usage reporting is on now names the endpoint events are actually sent to, `usage-reporting.endpoint` in `config.yml`, instead of always naming `https://trace.danielstephenson.dev`. On a server that had changed the endpoint, the notice named a server the plugin was not reporting to. Nothing about what is sent, or where, changed.
 - Bare `/mr` now links to the user guide (`USER_GUIDE.md`) instead of the repository's wiki, which has no pages, so the banner's only link led players to no documentation. `COMMANDS.md` says so.
 - The `Dev Release` workflow now retries publishing the `dev` prerelease before giving up. The release and its tag have to be deleted and recreated for the tag to move to the new commit, and a transient API failure inside that window previously left the repository with no `dev` release at all until the workflow was re-run by hand. Each attempt now starts from a clean slate, and an exhausted retry fails loudly.
 

@@ -42,26 +42,38 @@ public final class MoreRecipes extends PonderBukkitPlugin {
         initializeCommandService();
 
         // usage reporting: one event now, one per command; see config.yml
-        trace = TraceClient.builder(configManager.getUsageReportingEndpoint(), getName(), getDescription().getVersion())
+        String usageReportingEndpoint = configManager.getUsageReportingEndpoint();
+        trace = TraceClient.builder(usageReportingEndpoint, getName(), getDescription().getVersion())
                 .key(configManager.getUsageReportingKey())
                 .enabled(configManager.isUsageReportingEnabled())
                 .serverWideConfig(getDataFolder().getParentFile())
                 .logger(getLogger())
                 .build();
-        announceUsageReporting();
+        announceUsageReporting(usageReportingEndpoint);
         trace.report("startup");
     }
 
     /**
      * The startup line that says, on every enable, whether usage reporting is on and how to turn it
      * off, or why it is off. The reason comes from the client so it matches what it actually did.
+     * @param endpoint The endpoint the client was built with, so the notice names where events go.
      */
-    private void announceUsageReporting() {
+    private void announceUsageReporting(String endpoint) {
         if (trace.isEnabled()) {
-            getLogger().info("Usage reporting is on: " + getName() + " sends its name, version and command names to https://trace.danielstephenson.dev, plus a random server ID (server-id in plugins/trace/config.yml) - nothing about players. Turn it off with usage-reporting.enabled: false in this plugin's config.yml, or for every plugin with enabled: false in plugins/trace/config.yml. Details: https://danielstephenson.dev/usage-reporting");
+            getLogger().info(usageReportingOnNotice(getName(), endpoint));
         } else {
             getLogger().info("Usage reporting is off (" + trace.disabledReason() + ").");
         }
+    }
+
+    /**
+     * The startup line logged when usage reporting is on.
+     * @param pluginName The name the plugin reports under.
+     * @param endpoint The endpoint events are sent to, from {@code usage-reporting.endpoint}.
+     * @return The notice, naming the endpoint given rather than the default one.
+     */
+    static String usageReportingOnNotice(String pluginName, String endpoint) {
+        return "Usage reporting is on: " + pluginName + " sends its name, version and command names to " + endpoint + ", plus a random server ID (server-id in plugins/trace/config.yml) - nothing about players. Turn it off with usage-reporting.enabled: false in this plugin's config.yml, or for every plugin with enabled: false in plugins/trace/config.yml. Details: https://danielstephenson.dev/usage-reporting";
     }
 
     @Override
