@@ -132,7 +132,7 @@ class PluginDescriptionTest {
      * @return The cells of each row after the header and separator rows, trimmed.
      * @throws IOException If the file cannot be read.
      */
-    private static List<List<String>> tableRowsUnder(String path, String heading) throws IOException {
+    static List<List<String>> tableRowsUnder(String path, String heading) throws IOException {
         File file = new File(path);
         assertTrue(file.isFile(), path + " was not found at " + file.getAbsolutePath());
 
@@ -169,7 +169,7 @@ class PluginDescriptionTest {
      * @param cell A table cell.
      * @return The cell with surrounding backticks removed: {@code `op`} becomes {@code op}.
      */
-    private static String unquote(String cell) {
+    static String unquote(String cell) {
         return cell.replaceAll("^`|`$", "");
     }
 }
