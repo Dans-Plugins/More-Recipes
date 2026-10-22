@@ -1,20 +1,17 @@
 package dansplugins.recipesystem.utils;
 
 import dansplugins.recipesystem.MoreRecipes;
+import dansplugins.recipesystem.StubServer;
 import dansplugins.recipesystem.objects.MoreRecipesItem;
 import dansplugins.recipesystem.services.ItemStackService;
-import org.bukkit.Bukkit;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Server;
-import org.bukkit.UnsafeValues;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,18 +32,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.clearInvocations;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * Exercises recipe registration against a stub server and inspects the recipe objects that reach
@@ -79,15 +72,11 @@ class RecipeRegistryTest {
 
     /**
      * Installs a stub server so that {@code Bukkit.addRecipe} and the item factory the recipe
-     * results are built through resolve without a running Spigot server. Bukkit permits its server
-     * singleton to be set only once per JVM, and Surefire reuses one JVM across test classes.
+     * results are built through resolve without a running Spigot server.
      */
     @BeforeAll
     static void installStubServer() {
-        if (Bukkit.getServer() == null) {
-            Bukkit.setServer(stubServer());
-        }
-        server = Bukkit.getServer();
+        server = StubServer.install();
     }
 
     @BeforeEach
@@ -328,31 +317,5 @@ class RecipeRegistryTest {
             }
         }
         throw new IllegalStateException("JavaPlugin no longer holds a " + PluginDescriptionFile.class.getSimpleName());
-    }
-
-    /**
-     * @return A server that records the recipes registered against it and hands out throwaway item
-     *         meta, which is all the recipe results need to be built.
-     */
-    @SuppressWarnings("deprecation")
-    private static Server stubServer() {
-        Server server = mock(Server.class);
-
-        ItemFactory itemFactory = mock(ItemFactory.class);
-        when(itemFactory.getItemMeta(any(Material.class))).thenAnswer(invocation -> mock(ItemMeta.class));
-        when(server.getItemFactory()).thenReturn(itemFactory);
-
-        // Copying an item stack into a recipe asks the server for the material's pre-1.13 form. Every
-        // material this plugin uses is a modern one with no legacy equivalent, which is what the
-        // stub's default answer of null says.
-        when(server.getUnsafe()).thenReturn(mock(UnsafeValues.class));
-
-        // Read back by Bukkit.setServer, which announces the server it was handed.
-        when(server.getLogger()).thenReturn(Logger.getLogger(RecipeRegistryTest.class.getName()));
-        when(server.getName()).thenReturn("a stub server");
-        when(server.getVersion()).thenReturn("test");
-        when(server.getBukkitVersion()).thenReturn("test");
-
-        return server;
     }
 }

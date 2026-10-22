@@ -62,6 +62,11 @@ short grass plant, not a grass block.
 | String | Grass, Grass, — | —, Grass, — | —, Grass, Grass | 1 |
 | TotemOfUndying | —, Diamond, — | Diamond Block, Diamond Block, Diamond Block | Emerald, Diamond Block, Emerald | 1 |
 
+Every item these recipes make, and every item `/mr get` gives, carries a display name (`String`,
+`Name Tag`, …) and a line of description below it. Minecraft only stacks items whose names and
+descriptions match, so these items stack with each other but not with the same item obtained
+another way, such as string dropped by a spider.
+
 ## Getting Items Directly
 
 Players with the `morerecipes.get` permission (operators, by default) can use `/mr get <itemName> <amount>` in-game to give themselves a specific item without crafting it. The command can't be run from the server console.
