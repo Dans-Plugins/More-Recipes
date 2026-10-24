@@ -14,6 +14,7 @@ Thank you for your interest in contributing to More Recipes! This guide will hel
 - A GitHub account
 - Git installed on your local machine
 - A Java IDE or text editor
+- A JDK (CI builds with 17) and [Maven](https://maven.apache.org/)
 - A basic understanding of Java
 
 ## Getting Started
@@ -56,6 +57,8 @@ Run the unit tests with:
 The tests live under `src/test/java/dansplugins/recipesystem/`, mirroring the package of the class they cover (`commands/GetCommandTest.java` covers `commands/GetCommand.java`, and so on). They use JUnit 5, with Mockito standing in for Bukkit collaborators (a stub `Server` where the code reaches for `Bukkit` statically); no Spigot server is started. Add or update a test for every behaviour change, and put it in the mirrored package.
 
 `mvn clean package` also runs the suite before building the JAR, and the `Build` workflow runs the same command on every pull request, so a failing test blocks CI.
+
+After building, the `Build` workflow also runs the [release-gates API-compatibility check](https://github.com/Dans-Plugins/release-gates#api-compatibility-check) against the JAR. It fails if the plugin references a Bukkit class, field or method that is missing from any Minecraft version in [`minecraft-versions.json`](minecraft-versions.json), or if its bytecode is newer than the Java those versions run on. `mvn test` does not run this check, so a pull request can pass locally and still fail CI. A constant that later versions renamed, such as `Material.GRASS` (`SHORT_GRASS` from 1.20.3), must not be referenced directly. Look it up by name through `utils/RenamedConstants.java` instead, which tries the current name first and then the older one.
 
 Some things can only be checked on a real server — recipe registration is accepted without complaint at startup even when a recipe is malformed, and the tests inspect what is handed to the server rather than crafting with it. For manual testing, place the built JAR from `target/` into a local Spigot server's `plugins` folder and restart the server.
 
