@@ -14,7 +14,8 @@ registered is not configurable; the file only controls usage reporting.
 When the plugin is enabled, and each time one of its commands is used, a small event is sent to the
 author's [trace](https://github.com/Stephenson-Software/trace-client-java) server so it is known which
 plugins are actually in use. An event carries the plugin's name, the event name (`startup` or
-`command`), the plugin version, and for a `command` event the command name, plus a random server ID (the
+`command`), the plugin version, and for a `command` event the command name — the base command as typed, `mr`
+or `morerecipes`, never the sub-command (`get`, `list`, `help`) or anything after it — plus a random server ID (the
 `server-id` line in `plugins/trace/config.yml`, which identifies no person, account or IP address; deleting the
 line gets a new one) and any tags set in a `tags:` block of that same file (none unless the server owner adds
 some; the file's header shows `ci: "true"` as an example) — nothing about players or the world. Sending happens off the main thread, never delays a
