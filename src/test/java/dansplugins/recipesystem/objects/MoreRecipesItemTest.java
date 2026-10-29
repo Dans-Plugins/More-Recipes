@@ -10,9 +10,12 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -89,6 +92,46 @@ class MoreRecipesItemTest {
     }
 
     /**
+     * Pins the material, display name and description each entry gives its items. Minecraft only
+     * stacks items whose names and descriptions match, so changing either leaves every item made
+     * before the change unable to stack with those made after it, which nothing else would catch.
+     * Prismarine Shard's misspelled description is asserted as it currently is; see #240.
+     */
+    @Test
+    void getItemStack_keepsEachEntrysMaterialDisplayNameAndDescription() {
+        Map<MoreRecipesItem, List<Object>> expected = new LinkedHashMap<>();
+        expected.put(MoreRecipesItem.BLAZE_ROD, Arrays.asList(Material.BLAZE_ROD, "Blaze Rod", "A rod of blazing fire."));
+        expected.put(MoreRecipesItem.CHAINMAIL_BOOTS, Arrays.asList(Material.CHAINMAIL_BOOTS, "Chainmail Boots", "A pair of boots made of interlocking metal links."));
+        expected.put(MoreRecipesItem.CHAINMAIL_CHESTPLATE, Arrays.asList(Material.CHAINMAIL_CHESTPLATE, "Chainmail Chestplate", "A chestplate of interlocking metal links."));
+        expected.put(MoreRecipesItem.CHAINMAIL_HELMET, Arrays.asList(Material.CHAINMAIL_HELMET, "Chainmail Helmet", "A helmet of interlocking links."));
+        expected.put(MoreRecipesItem.CHAINMAIL_LEGGINGS, Arrays.asList(Material.CHAINMAIL_LEGGINGS, "Chainmail Leggings", "A set of leggings of interlocking metal links."));
+        expected.put(MoreRecipesItem.COBWEB, Arrays.asList(Material.COBWEB, "Cobweb", "Sticky."));
+        expected.put(MoreRecipesItem.DIAMOND_HORSE_ARMOR, Arrays.asList(Material.DIAMOND_HORSE_ARMOR, "Diamond Horse Armor", "Horse Armor crafted out of Diamonds"));
+        expected.put(MoreRecipesItem.GOLDEN_HORSE_ARMOR, Arrays.asList(Material.GOLDEN_HORSE_ARMOR, "Golden Horse Armor", "Horse Armor crafted out of Pure Gold"));
+        expected.put(MoreRecipesItem.GRASS_BLOCK, Arrays.asList(Material.GRASS_BLOCK, "Grass Block", "Dirt with life on top."));
+        expected.put(MoreRecipesItem.GUNPOWDER, Arrays.asList(Material.GUNPOWDER, "Gunpowder", "Explosive."));
+        expected.put(MoreRecipesItem.IRON_HORSE_ARMOR, Arrays.asList(Material.IRON_HORSE_ARMOR, "Iron Horse Armor", "Horse Armor crafted out of Iron"));
+        expected.put(MoreRecipesItem.LEAD, Arrays.asList(Material.LEAD, "Lead", "Used to lead animals or keep them in one place."));
+        expected.put(MoreRecipesItem.NAME_TAG, Arrays.asList(Material.NAME_TAG, "Name Tag", "Used to give names to creatures."));
+        expected.put(MoreRecipesItem.PRISMARINE_SHARD, Arrays.asList(Material.PRISMARINE_SHARD, "Prismarine Shard", "Used for a an assortment of contruction materials."));
+        expected.put(MoreRecipesItem.SADDLE, Arrays.asList(Material.SADDLE, "Saddle", "Used to ride certain animals."));
+        expected.put(MoreRecipesItem.SLIME_BALL, Arrays.asList(Material.SLIME_BALL, "Slime Ball", "Slimy."));
+        expected.put(MoreRecipesItem.STRING, Arrays.asList(Material.STRING, "String", "Used to craft bows, fishing poles and wool."));
+        expected.put(MoreRecipesItem.TOTEM_OF_UNDYING, Arrays.asList(Material.TOTEM_OF_UNDYING, "Totem of Undying", "Used for a second chance at life."));
+        assertEquals(Arrays.asList(MoreRecipesItem.values()), new ArrayList<>(expected.keySet()),
+                "every catalog item needs a row here, in catalog order");
+
+        RecordingItemStackService itemStackService = new RecordingItemStackService();
+        for (MoreRecipesItem item : MoreRecipesItem.values()) {
+            item.getItemStack(itemStackService, null, 1);
+
+            assertEquals(expected.get(item),
+                    Arrays.asList(itemStackService.lastType, itemStackService.lastName, itemStackService.lastDescription),
+                    item.getItemName() + "'s material, display name or description changed");
+        }
+    }
+
+    /**
      * Guards the copy of the item list carried by {@code USER_GUIDE.md}, which cannot be generated
      * from the catalog and so drifts silently when an item is added or removed.
      */
@@ -126,7 +169,9 @@ class MoreRecipesItemTest {
      */
     private static class RecordingItemStackService extends ItemStackService {
         private int lastAmount;
+        private Material lastType;
         private String lastName;
+        private String lastDescription;
 
         RecordingItemStackService() {
             super(null);
@@ -135,7 +180,9 @@ class MoreRecipesItemTest {
         @Override
         public ItemStack createItemStack(int amount, Material type, String name, String description) {
             lastAmount = amount;
+            lastType = type;
             lastName = name;
+            lastDescription = description;
             return mock(ItemStack.class);
         }
     }
