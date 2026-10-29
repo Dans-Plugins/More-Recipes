@@ -30,6 +30,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Usage reporting now honours server-wide tags: a `tags:` block in `plugins/trace/config.yml` is added to every event sent by each plugin on the server that reports this way (the release gates write `ci: "true"` there, so test-server boots are left out of real-installation figures). Nothing changes for a server without a `tags:` block. The vendored trace client is updated from 0.2.0 to 0.3.0.
 - `/mr get`'s refusals are now covered by tests: the console is turned away with `This command can't be used in the console.`, a missing item name or amount gets the usage line, and an unknown item name is reported without touching the inventory — none of these was tested before, though `COMMANDS.md` and `USER_GUIDE.md` both state the console refusal. No command changed.
 - Every usage event now carries the plugin version, `command` events included; previously only the `startup` event did. The vendored trace client is updated from 0.3.0 to 0.4.0, which adds the version to each event itself. `CONFIG.md` and the comment in the bundled `config.yml` say so.
+- Usage reporting now counts a `command` event only when a player runs the command; console, command-block and plugin-dispatched commands are no longer reported.
 
 ### Fixed
 
