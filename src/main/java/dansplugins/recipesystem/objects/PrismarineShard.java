@@ -20,7 +20,7 @@ public class PrismarineShard {
     }
 
     public ItemStack getItemStack(int amount) {
-        return itemStackService.createItemStack(amount, PRISMARINE_SHARD, "Prismarine Shard", "Used for a an assortment of contruction materials.");
+        return itemStackService.createItemStack(amount, PRISMARINE_SHARD, "Prismarine Shard", "Used for an assortment of construction materials.");
     }
 
     public void registerRecipe() {
