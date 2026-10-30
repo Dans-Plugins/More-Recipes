@@ -113,7 +113,7 @@ class MoreRecipesItemTest {
         expected.put(MoreRecipesItem.IRON_HORSE_ARMOR, Arrays.asList(Material.IRON_HORSE_ARMOR, "Iron Horse Armor", "Horse Armor crafted out of Iron"));
         expected.put(MoreRecipesItem.LEAD, Arrays.asList(Material.LEAD, "Lead", "Used to lead animals or keep them in one place."));
         expected.put(MoreRecipesItem.NAME_TAG, Arrays.asList(Material.NAME_TAG, "Name Tag", "Used to give names to creatures."));
-        expected.put(MoreRecipesItem.PRISMARINE_SHARD, Arrays.asList(Material.PRISMARINE_SHARD, "Prismarine Shard", "Used for a an assortment of contruction materials."));
+        expected.put(MoreRecipesItem.PRISMARINE_SHARD, Arrays.asList(Material.PRISMARINE_SHARD, "Prismarine Shard", "Used for an assortment of construction materials."));
         expected.put(MoreRecipesItem.SADDLE, Arrays.asList(Material.SADDLE, "Saddle", "Used to ride certain animals."));
         expected.put(MoreRecipesItem.SLIME_BALL, Arrays.asList(Material.SLIME_BALL, "Slime Ball", "Slimy."));
         expected.put(MoreRecipesItem.STRING, Arrays.asList(Material.STRING, "String", "Used to craft bows, fishing poles and wool."));
