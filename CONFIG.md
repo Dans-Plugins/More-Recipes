@@ -23,6 +23,12 @@ from the console, a command block or another plugin send no event. Sending happe
 tick, and is dropped silently if the
 server cannot be reached. Set `usage-reporting.enabled` to `false` to turn it off.
 
+Repeats are counted rather than sent one by one. The first `command` event with a given command name goes out at
+once, and further ones with that name in the next minute are sent together as one event when the minute ends, for as
+long as they keep coming. That event carries how many it stands for, as its value and as a `coalesced` tag. Whatever is
+still being counted is sent when the plugin is disabled. `/mr list` and `/mr get` both send the command name `mr`, so
+they are counted together, and `startup` events are never held back.
+
 It can also be turned off for every plugin on the server that reports this way, with `enabled: false`
 in `plugins/trace/config.yml` (created the first time such a plugin enables; plugins never turn it
 back on), or for the whole server process with the environment variable `TRACE_USAGE_REPORTING=off`

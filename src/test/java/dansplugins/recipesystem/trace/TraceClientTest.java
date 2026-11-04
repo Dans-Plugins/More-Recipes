@@ -397,6 +397,8 @@ class TraceClientTest {
         // Arrange
         // Hold the sending thread on the first report so everything behind it
         // queues, overfill the queue, then let the server drain and count.
+        // Flooded with startup because it is the one event that is never
+        // coalesced: any other repeated event would only reach the queue once.
         CountDownLatch release = new CountDownLatch(1);
         AtomicInteger delivered = new AtomicInteger();
         HttpServer slow = HttpServer.create(new InetSocketAddress("127.0.0.1", 0), 0);
@@ -417,7 +419,7 @@ class TraceClientTest {
 
         // Act
         for (int i = 0; i < flood; i++) {
-            client.report("flood");
+            client.report("startup");
         }
         release.countDown();
         long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(20);
@@ -425,19 +427,116 @@ class TraceClientTest {
         while (System.nanoTime() < deadline) {
             Thread.sleep(200);
             int now = delivered.get();
-            if (now == seen) {
+            if (now == seen && now >= TraceClient.QUEUE_CAPACITY) {
                 break; // nothing arrived in the last 200 ms: the queue is drained
             }
             seen = now;
         }
 
         // Assert
-        assertTrue(delivered.get() >= 1, "the first report was in flight and must land");
+        assertTrue(delivered.get() >= TraceClient.QUEUE_CAPACITY,
+                "delivered " + delivered.get() + "; the queue was never filled, so its bound was not tested");
         assertTrue(delivered.get() <= TraceClient.QUEUE_CAPACITY + 1,
                 "delivered " + delivered.get() + " of " + flood + "; at most the in-flight one plus a full queue may survive");
         assertTrue(delivered.get() < flood, "an unbounded queue would have delivered all " + flood);
         client.close();
         slow.stop(0);
+    }
+
+    @Test
+    void report_sendsTheFirstOfARepeatAtOnceAndTheRestAsOneCountedEvent() throws Exception {
+        // Arrange
+        TraceClient client = TraceClient.builder(baseUrl(), "MyPlugin", "1.2.3").key("k").build();
+        Map<String, String> tags = Collections.singletonMap("name", "mr");
+
+        // Act
+        client.report("command", null, tags);
+        assertTrue(arrived.await(5, TimeUnit.SECONDS), "the first report should not wait for the window");
+        client.report("command", null, tags);
+        client.report("command", null, tags);
+        assertEquals(1, received.size(), "repeats inside the window are only counted");
+        client.close();
+
+        // Assert
+        assertEquals(2, received.size(), "close() sends the open count as one event");
+        assertEquals("{\"application\":\"MyPlugin\",\"name\":\"command\",\"tags\":{\"name\":\"mr\",\"version\":\"1.2.3\"}}",
+                received.get(0).body);
+        assertEquals("{\"application\":\"MyPlugin\",\"name\":\"command\",\"value\":2.0,"
+                        + "\"tags\":{\"name\":\"mr\",\"version\":\"1.2.3\",\"coalesced\":\"2\"}}",
+                received.get(1).body);
+    }
+
+    @Test
+    void report_sendsTheCountWhenTheWindowClosesThenStopsCounting() throws Exception {
+        // Arrange
+        arrived = new CountDownLatch(2);
+        TraceClient client = TraceClient.builder(baseUrl(), "MyPlugin", "1.2.3").key("k")
+                .coalesceWindowMillis(100).build();
+
+        // Act
+        client.report("command");
+        client.report("command");
+
+        // Assert
+        assertTrue(arrived.await(5, TimeUnit.SECONDS), "the count should go out when the window closes, without close()");
+        assertTrue(received.get(1).body.contains("\"coalesced\":\"1\""), received.get(1).body);
+        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(5);
+        while (client.coalescing() > 0 && System.nanoTime() < deadline) {
+            Thread.sleep(20);
+        }
+        assertEquals(0, client.coalescing(), "a window that counted nothing ends");
+        assertEquals(2, received.size(), "a window that counted nothing sends nothing");
+        client.close();
+    }
+
+    @Test
+    void report_countsEachCommandNameSeparately() throws Exception {
+        // Arrange
+        TraceClient client = TraceClient.builder(baseUrl(), "MyPlugin", "1.2.3").key("k").build();
+
+        // Act
+        client.report("command", null, Collections.singletonMap("name", "mr"));
+        client.report("command", null, Collections.singletonMap("name", "mr"));
+        client.report("command", null, Collections.singletonMap("name", "morerecipes"));
+        client.close();
+
+        // Assert
+        assertEquals(3, received.size(), "the first of each name, and a count for the one that repeated");
+        assertEquals(1, received.stream().filter(request -> request.body.contains("coalesced")).count());
+        assertTrue(received.get(2).body.contains("\"name\":\"mr\""), received.get(2).body);
+    }
+
+    @Test
+    void report_neverHoldsBackStartup() throws Exception {
+        // Arrange
+        TraceClient client = TraceClient.builder(baseUrl(), "MyPlugin", "1.2.3").key("k").build();
+
+        // Act
+        client.report("startup");
+        client.report("startup");
+        client.report("startup");
+        int counting = client.coalescing();
+        client.close();
+
+        // Assert
+        assertEquals(0, counting, "startup opens no window");
+        assertEquals(3, received.size());
+        assertTrue(received.stream().noneMatch(request -> request.body.contains("coalesced")));
+    }
+
+    @Test
+    void report_boundsHowManyDifferentEventsAreCounted() {
+        // Arrange
+        TraceClient client = TraceClient.builder(baseUrl(), "MyPlugin", "1.2.3").key("k").build();
+
+        // Act
+        for (int i = 0; i < TraceClient.MAX_COALESCED_EVENTS + 10; i++) {
+            client.report("event-" + i);
+        }
+
+        // Assert
+        assertEquals(TraceClient.MAX_COALESCED_EVENTS, client.coalescing());
+        client.close();
     }
 
     @Test
