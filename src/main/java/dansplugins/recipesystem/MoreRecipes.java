@@ -42,7 +42,7 @@ public final class MoreRecipes extends PonderBukkitPlugin {
         handlebStatsIntegration();
         initializeCommandService();
 
-        // usage reporting: one event now, one per command; see config.yml
+        // usage reporting: one event now, then player commands, which the client counts when repeated; see config.yml
         String usageReportingEndpoint = configManager.getUsageReportingEndpoint();
         trace = TraceClient.builder(usageReportingEndpoint, getName(), getDescription().getVersion())
                 .key(configManager.getUsageReportingKey())
