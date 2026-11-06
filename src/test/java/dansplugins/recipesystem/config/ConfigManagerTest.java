@@ -100,6 +100,24 @@ class ConfigManagerTest {
         client.close();
     }
 
+    /**
+     * {@code endpoint:} with nothing after it is a YAML null, which Bukkit cannot tell from a key that
+     * is missing, so it reads as the bundled default. Only {@code ""} turns reporting off, which is
+     * why {@code CONFIG.md} and the bundled {@code config.yml} name the empty string.
+     */
+    @Test
+    void usageReporting_aKeyLeftWithNoValueReadsAsTheBundledDefault() {
+        YamlConfiguration onDisk = YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint:\n  key:\n"));
+        onDisk.setDefaults(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint: https://trace.danielstephenson.dev\n  key: bundled-key\n")));
+        when(plugin.getConfig()).thenReturn(onDisk);
+
+        assertTrue(configManager.isUsageReportingEnabled());
+        assertEquals("https://trace.danielstephenson.dev", configManager.getUsageReportingEndpoint());
+        assertEquals("bundled-key", configManager.getUsageReportingKey());
+    }
+
     // The block-on-disk half of the upgrade story, against a real YamlConfiguration so
     // isSet() and getDefaults() behave as they do on a server, not as a mock says.
 

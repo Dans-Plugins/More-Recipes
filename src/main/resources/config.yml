@@ -22,12 +22,13 @@
 # Details: https://danielstephenson.dev/usage-reporting
 usage-reporting:
   enabled: true
-  # The trace server events are sent to. Empty means reporting is off
-  # regardless of the switch above.
+  # The trace server events are sent to. "" means reporting is off regardless
+  # of the switch above; no value at all reads as this default instead.
   endpoint: https://trace.danielstephenson.dev
   # The key identifies this plugin to the trace server, so reports are
   # attributed to More-Recipes and can be revoked as a group if they are ever
   # abused. It is not a secret -- it ships in this file on every server that
   # runs the plugin -- and it cannot do anything except report as this
-  # plugin. Empty means reporting is off regardless of the switch above.
+  # plugin. "" means reporting is off regardless of the switch above; no value
+  # at all reads as this default instead.
   key: "sODQvHpRd7JS0Eu4eLXt6ZIB9EEG6t8hqjAd0Ov3Q1c"
