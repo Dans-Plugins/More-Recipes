@@ -53,13 +53,17 @@ public class ConfigManager {
     // reporting off on every existing installation. Verified against
     // YamlConfiguration, not assumed.
 
+    /** False when the endpoint has been blanked, since events then have nowhere the operator chose to go. */
     public boolean isUsageReportingEnabled() {
-        return plugin.getConfig().getBoolean(USAGE_REPORTING_ENABLED_KEY);
+        String endpoint = plugin.getConfig().getString(USAGE_REPORTING_ENDPOINT_KEY);
+        boolean endpointBlanked = endpoint != null && endpoint.trim().isEmpty();
+        return plugin.getConfig().getBoolean(USAGE_REPORTING_ENABLED_KEY) && !endpointBlanked;
     }
 
+    /** Never blank, because the trace client refuses a blank endpoint by throwing. */
     public String getUsageReportingEndpoint() {
         String endpoint = plugin.getConfig().getString(USAGE_REPORTING_ENDPOINT_KEY);
-        return endpoint != null ? endpoint : DEFAULT_USAGE_REPORTING_ENDPOINT;
+        return endpoint == null || endpoint.trim().isEmpty() ? DEFAULT_USAGE_REPORTING_ENDPOINT : endpoint;
     }
 
     /** Empty when no key is configured or bundled, which the client treats as "off". */

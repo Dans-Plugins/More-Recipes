@@ -1,10 +1,13 @@
 package dansplugins.recipesystem.config;
 
+import dansplugins.recipesystem.trace.TraceClient;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.StringReader;
 
@@ -75,6 +78,26 @@ class ConfigManagerTest {
         assertFalse(configManager.isUsageReportingEnabled());
         assertEquals("http://localhost:8080", configManager.getUsageReportingEndpoint());
         assertEquals("abc", configManager.getUsageReportingKey());
+    }
+
+    /**
+     * Blanking the endpoint is a plausible way to try to stop reporting. It must not send events to
+     * the default endpoint, and the client's builder throws on a blank one, which would escape onEnable().
+     */
+    @ParameterizedTest
+    @ValueSource(strings = {"\"\"", "\"   \""})
+    void usageReporting_isOffWithABlankEndpointAndStillBuildsAClient(String blank) {
+        when(plugin.getConfig()).thenReturn(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint: " + blank + "\n  key: bundled-key\n")));
+
+        assertFalse(configManager.isUsageReportingEnabled());
+
+        TraceClient client = TraceClient.builder(configManager.getUsageReportingEndpoint(), "More-Recipes", "1.0.0")
+                .key(configManager.getUsageReportingKey())
+                .enabled(configManager.isUsageReportingEnabled())
+                .build();
+        assertFalse(client.isEnabled());
+        client.close();
     }
 
     // The block-on-disk half of the upgrade story, against a real YamlConfiguration so
