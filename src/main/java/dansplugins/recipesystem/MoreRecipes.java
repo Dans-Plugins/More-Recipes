@@ -92,15 +92,26 @@ public final class MoreRecipes extends PonderBukkitPlugin {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        // Console, command-block and plugin-dispatched commands are not counted.
-        if (sender instanceof Player) {
-            trace.report("command", null, Collections.singletonMap("name", cmd.getName()));
-        }
+        reportCommandUse(trace, sender, cmd);
         if (args.length == 0) {
             DefaultCommand defaultCommand = new DefaultCommand(this);
             return defaultCommand.execute(sender);
         }
         return commandService.interpretAndExecuteCommand(sender, label, args);
+    }
+
+    /**
+     * Reports a {@code command} usage event if the sender is a player. Any other sender, such as
+     * the console or a command block, is not counted, as {@code CONFIG.md} and the bundled
+     * {@code config.yml} tell server owners.
+     * @param trace The client to report to.
+     * @param sender The sender of the command.
+     * @param cmd The command that was sent. Only its name is reported.
+     */
+    static void reportCommandUse(TraceClient trace, CommandSender sender, Command cmd) {
+        if (sender instanceof Player) {
+            trace.report("command", null, Collections.singletonMap("name", cmd.getName()));
+        }
     }
 
     public String getVersion() {
