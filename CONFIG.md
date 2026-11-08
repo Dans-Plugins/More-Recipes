@@ -20,8 +20,10 @@ plugins are actually in use. An event carries the plugin's name, the event name 
 base command was used, never the sub-command (`get`, `list`, `help`) or anything after it — plus a random server ID (the
 `server-id` line in `plugins/trace/config.yml`, which identifies no person, account or IP address; deleting the
 line gets a new one) and any tags set in a `tags:` block of that same file (none unless the server owner adds
-some; the file's header shows `ci: "true"` as an example) — nothing about players or the world. Commands run
-from the console, a command block or another plugin send no event. Sending happens off the main thread, never delays a
+some; the file's header shows `ci: "true"` as an example) — nothing about players or the world. Commands whose
+sender is not a player — the console, a command block, or another plugin dispatching as the console — send no event;
+a command another plugin runs as a player (`player.performCommand`, or `Bukkit.dispatchCommand` with a player as
+the sender) is sent like one the player typed. Sending happens off the main thread, never delays a
 tick, and is dropped silently if the
 server cannot be reached. Set `usage-reporting.enabled` to `false` to turn it off.
 
