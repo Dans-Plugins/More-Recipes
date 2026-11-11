@@ -6,6 +6,10 @@ More Recipes is a Spigot plugin that adds crafting recipes for items that are no
 
 ## Installation
 
+More Recipes needs a Spigot server, or a fork of Spigot such as Paper. The Minecraft versions it is
+tested on are listed in the README's [Supported Minecraft Versions](README.md#supported-minecraft-versions)
+section.
+
 1. Download the latest `More-Recipes-<version>.jar` from the [Releases](https://github.com/Dans-Plugins/More-Recipes/releases) page.
 2. Place the JAR in your server's `plugins/` folder.
 3. Restart the server.
