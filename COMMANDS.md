@@ -12,3 +12,6 @@ All commands use `/mr` or `/morerecipes` as the base.
 `<itemName>` is one of the names `/mr list` prints (for example `NameTag`; case doesn't matter), and `<amount>` is a
 whole number of at least `1`. Items that don't fit in the inventory are not given: the reply says
 how many were left out, or `Inventory full.` if none fit.
+
+Anything after `/mr` that is not one of the sub-commands above (a typo such as `/mr lsit`, for
+example) is answered with `That command wasn't found.`
