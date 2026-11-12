@@ -19,10 +19,13 @@ public class GetCommand extends AbstractPluginCommand {
         this.itemStackService = itemStackService;
     }
 
+    /**
+     * Handles {@code /mr get} with nothing after it. Delegates so that the console is refused here
+     * too, rather than being sent a usage line for a command it can never run.
+     */
     @Override
     public boolean execute(CommandSender commandSender) {
-        commandSender.sendMessage(ChatColor.RED + "Usage: /morerecipes get (itemName) (amount)");
-        return false;
+        return execute(commandSender, new String[0]);
     }
 
     @Override
