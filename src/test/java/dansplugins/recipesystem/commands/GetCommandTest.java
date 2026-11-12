@@ -169,6 +169,18 @@ class GetCommandTest {
     }
 
     @Test
+    void execute_withNoArgumentsFromConsole_isRefusedRatherThanSentTheUsage() {
+        GetCommand getCommand = new GetCommand(mock(ItemStackService.class));
+        ConsoleCommandSender console = mock(ConsoleCommandSender.class);
+
+        boolean result = getCommand.execute(console);
+
+        assertFalse(result);
+        verify(console).sendMessage("This command can't be used in the console.");
+        verify(console, never()).sendMessage(contains("Usage:"));
+    }
+
+    @Test
     void execute_withoutAnAmount_sendsTheUsageWithoutLookingUpItem() {
         ItemStackService itemStackService = mock(ItemStackService.class);
         GetCommand getCommand = new GetCommand(itemStackService);
