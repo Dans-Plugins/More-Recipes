@@ -50,7 +50,7 @@ To turn it off:
 
 Each startup logs whether reporting is on or, if it is off, why. Details: <https://danielstephenson.dev/usage-reporting>
 
-The plugin also uses [bStats](https://bstats.org/), which is separate from usage reporting and is not turned off by any of the switches above. Every thirty minutes bStats sends the plugin's name and version, a random server UUID, the number of players online, the server software and version, and the Java version, operating system and CPU core count. It is turned off for every plugin on the server with `enabled: false` in `plugins/bStats/config.yml`. [CONFIG.md](CONFIG.md#bstats) lists everything it sends.
+The plugin also uses [bStats](https://bstats.org/), which is separate from usage reporting and is not turned off by any of the switches above. Five minutes after startup and every thirty minutes after that, bStats sends the plugin's name and version, a random server UUID, the number of players online, the server software and version, and the Java version, operating system and CPU core count. It is turned off for every plugin on the server with `enabled: false` in `plugins/bStats/config.yml`. [CONFIG.md](CONFIG.md#bstats) lists everything it sends.
 
 ## License
 
