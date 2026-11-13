@@ -40,3 +40,20 @@ or `DO_NOT_TRACK=1`. Each startup logs whether reporting is on or, if it is off,
 `usage-reporting` block is written into `config.yml` on the first enable that finds it missing, so
 the switch is visible on servers upgraded from before it existed. Details:
 <https://danielstephenson.dev/usage-reporting>.
+
+## bStats
+
+Separately from usage reporting, the plugin also starts [bStats](https://bstats.org/) metrics when it
+is enabled (plugin ID `12140`). bStats is not controlled by this plugin's `config.yml`, and none of the
+usage-reporting switches above (`usage-reporting.enabled`, `plugins/trace/config.yml`,
+`TRACE_USAGE_REPORTING`, `DO_NOT_TRACK`) turn it off.
+
+Five minutes after startup, and every thirty minutes after that, data is sent to `https://bStats.org`:
+the plugin's name, version and bStats ID, and about the server, a random server UUID (the `serverUuid`
+line in `plugins/bStats/config.yml`), the number of players online, whether the server is in online
+mode, the server software and its version, the Java version, the operating system's name, architecture
+and version, and the number of CPU cores. No player names or UUIDs are sent. If another plugin on the
+server also uses bStats, the data may be sent by that plugin rather than this one.
+
+`plugins/bStats/config.yml` is created by the first plugin on the server that uses bStats. Set
+`enabled: false` there to turn bStats off for every plugin on the server that uses it.

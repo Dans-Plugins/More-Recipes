@@ -90,6 +90,10 @@ file only controls usage reporting, which is on by default and is turned off wit
 `usage-reporting.enabled: false`. See [CONFIG.md](CONFIG.md) for every key, what is sent and the
 other ways to turn it off.
 
+The plugin also sends [bStats](https://bstats.org/) metrics, which this file does not control. They
+are turned off with `enabled: false` in `plugins/bStats/config.yml`, which also turns bStats off
+for every other plugin on the server that uses it. [CONFIG.md](CONFIG.md#bstats) lists what bStats sends.
+
 ## Support
 
 Ask questions in the [Discord server](https://discord.gg/xXtuAQ2) or open a [GitHub issue](https://github.com/Dans-Plugins/More-Recipes/issues).
