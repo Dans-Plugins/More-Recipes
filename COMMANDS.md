@@ -15,3 +15,15 @@ how many were left out, or `Inventory full.` if none fit.
 
 Anything after `/mr` that is not one of the sub-commands above (a typo such as `/mr lsit`, for
 example) is answered with `That command wasn't found.`
+
+## When `/mr get` gives nothing
+
+`/mr get` gives nothing and replies as follows when its arguments can't be used:
+
+| Input | Reply |
+|-------|-------|
+| The item name or the amount is missing, or the amount is not a whole number (`/mr get Saddle two`) | `Usage: /morerecipes get (itemName) (amount)` |
+| The amount is `0` or less | `Amount must be at least 1.` |
+| The item name is not one `/mr list` prints | `That isn't an item in More Recipes!` |
+| Typed at the server console, with or without arguments | `This command can't be used in the console.` |
+| None of the items fit in the inventory | `Inventory full.` |
