@@ -31,6 +31,7 @@ class GetCommandTest {
 
         assertFalse(result);
         verify(itemStackService, never()).getItemStack(anyString(), anyInt());
+        verify(player).sendMessage(contains("Usage: /morerecipes get (itemName) (amount)"));
     }
 
     @Test
