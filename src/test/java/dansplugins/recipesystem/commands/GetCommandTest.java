@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.contains;
+import static org.mockito.ArgumentMatchers.endsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
@@ -143,6 +144,48 @@ class GetCommandTest {
         assertTrue(result);
         verify(inventory).addItem(itemStack);
         verify(player).sendMessage(contains("Saddle created."));
+    }
+
+    @Test
+    void execute_namesTheItemAsTheCatalogDoesWhateverCaseWasTyped() {
+        ItemStackService itemStackService = mock(ItemStackService.class);
+        ItemStack itemStack = mock(ItemStack.class);
+        when(itemStackService.getItemStack("nAmEtAg", 2)).thenReturn(itemStack);
+
+        GetCommand getCommand = new GetCommand(itemStackService);
+        Player player = mock(Player.class);
+        PlayerInventory inventory = mock(PlayerInventory.class);
+        when(player.getInventory()).thenReturn(inventory);
+        when(inventory.addItem(itemStack)).thenReturn(new HashMap<>());
+
+        boolean result = getCommand.execute(player, new String[]{"nAmEtAg", "2"});
+
+        assertTrue(result);
+        verify(player).sendMessage(endsWith("NameTag created."));
+        verify(player, never()).sendMessage(contains("nAmEtAg"));
+    }
+
+    @Test
+    void execute_whenSomeItemsDoNotFit_namesTheItemAsTheCatalogDoes() {
+        ItemStackService itemStackService = mock(ItemStackService.class);
+        ItemStack itemStack = mock(ItemStack.class);
+        when(itemStackService.getItemStack("SADDLE", 100)).thenReturn(itemStack);
+
+        ItemStack leftoverStack = mock(ItemStack.class);
+        when(leftoverStack.getAmount()).thenReturn(37);
+        HashMap<Integer, ItemStack> leftover = new HashMap<>();
+        leftover.put(0, leftoverStack);
+
+        GetCommand getCommand = new GetCommand(itemStackService);
+        Player player = mock(Player.class);
+        PlayerInventory inventory = mock(PlayerInventory.class);
+        when(player.getInventory()).thenReturn(inventory);
+        when(inventory.addItem(itemStack)).thenReturn(leftover);
+
+        boolean result = getCommand.execute(player, new String[]{"SADDLE", "100"});
+
+        assertTrue(result);
+        verify(player).sendMessage(endsWith("63 Saddle created. 37 didn't fit in your inventory."));
     }
 
     @Test

@@ -10,8 +10,9 @@ All commands use `/mr` or `/morerecipes` as the base.
 | `/mr get <itemName> <amount>` | Give yourself a specified amount of a More Recipes item. Players only; the console is refused. | `morerecipes.get` |
 
 `<itemName>` is one of the names `/mr list` prints (for example `NameTag`; case doesn't matter), and `<amount>` is a
-whole number of at least `1`. Items that don't fit in the inventory are not given: the reply says
-how many were left out, or `Inventory full.` if none fit.
+whole number of at least `1`. The reply names the item as `/mr list` prints it, whatever case was
+typed (`/mr get saddle 1` is answered with `Saddle created.`). Items that don't fit in the inventory
+are not given: the reply says how many were left out, or `Inventory full.` if none fit.
 
 Anything after `/mr` that is not one of the sub-commands above (a typo such as `/mr lsit`, for
 example) is answered with `That command wasn't found.`

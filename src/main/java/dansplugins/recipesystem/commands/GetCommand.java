@@ -1,5 +1,6 @@
 package dansplugins.recipesystem.commands;
 
+import dansplugins.recipesystem.objects.MoreRecipesItem;
 import dansplugins.recipesystem.services.ItemStackService;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -63,6 +64,8 @@ public class GetCommand extends AbstractPluginCommand {
             return false;
         }
 
+        String itemName = catalogName(itemToGet);
+
         // add to player's inventory, keeping whatever didn't fit
         Map<Integer, ItemStack> leftover = player.getInventory().addItem(item);
         int amountNotAdded = countLeftoverItems(leftover);
@@ -73,13 +76,24 @@ public class GetCommand extends AbstractPluginCommand {
         }
 
         if (amountNotAdded > 0) {
-            player.sendMessage(ChatColor.YELLOW + "" + (amount - amountNotAdded) + " " + itemToGet
+            player.sendMessage(ChatColor.YELLOW + "" + (amount - amountNotAdded) + " " + itemName
                     + " created. " + amountNotAdded + " didn't fit in your inventory.");
             return true;
         }
 
-        player.sendMessage(ChatColor.GREEN + "" + itemToGet + " created.");
+        player.sendMessage(ChatColor.GREEN + "" + itemName + " created.");
         return true;
+    }
+
+    /**
+     * The name a reply gives the item, as {@code /mr list} prints it rather than as it was typed,
+     * since the lookup ignores case.
+     * @param typedName The item name the player typed.
+     * @return The catalog's name for the item, or the typed name if the catalog has no such item.
+     */
+    private String catalogName(String typedName) {
+        MoreRecipesItem catalogItem = MoreRecipesItem.findByName(typedName);
+        return catalogItem == null ? typedName : catalogItem.getItemName();
     }
 
     /**
