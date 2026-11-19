@@ -5,7 +5,7 @@ registered is not configurable; the file only controls usage reporting.
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `usage-reporting.enabled` | `true` | Whether the plugin reports usage events (see below). Set to `false` to turn it off. |
+| `usage-reporting.enabled` | `true` | Whether the plugin reports usage events (see below). Set to `false` to turn it off. Other spellings of the block or the switch (`usage_reporting:`, `usageReporting:`, `enable: false`, `disabled: true`), or `usage-reporting: false`, also count as off. |
 | `usage-reporting.endpoint` | `https://trace.danielstephenson.dev` | The trace server events are sent to. `""` means reporting is off regardless of `enabled`. |
 | `usage-reporting.key` | the plugin's key | Identifies this plugin to the trace server so reports are attributed to it. Not a secret: it ships in the default config and can only report as More-Recipes. `""` means reporting is off regardless of `enabled`. |
 
