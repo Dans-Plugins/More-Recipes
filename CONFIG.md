@@ -25,7 +25,11 @@ sender is not a player — the console, a command block, or another plugin dispa
 a command another plugin runs as a player (`player.performCommand`, or `Bukkit.dispatchCommand` with a player as
 the sender) is sent like one the player typed. Sending happens off the main thread, never delays a
 tick, and is dropped silently if the
-server cannot be reached. Set `usage-reporting.enabled` to `false` to turn it off.
+server cannot be reached. Set `usage-reporting.enabled` to `false` to turn it off. Only `true` (or
+`on`, `yes`) turns it on: any other value, including a quoted `"false"` or a typo, turns it off. Once
+turned off it stays off: the plugin never writes `config.yml` back with reporting on, even if the file was
+edited while the server was running, and never overwrites a `config.yml` it cannot parse (it logs an
+error instead, and reporting stays off until the file is fixed).
 
 Repeats are counted rather than sent one by one. The first `command` event with a given command name goes out at
 once, and further ones with that name in the next minute are sent together as one event when the minute ends, for as

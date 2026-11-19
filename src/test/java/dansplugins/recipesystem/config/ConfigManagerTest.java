@@ -6,10 +6,14 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -48,7 +52,7 @@ class ConfigManagerTest {
         // block in its config.yml. Bukkit's one-argument getters fall through
         // to the jar's defaults; the two-argument ones would return their
         // fallback and turn reporting off on every existing installation.
-        when(config.getBoolean("usage-reporting.enabled")).thenReturn(true);
+        when(config.get("usage-reporting.enabled")).thenReturn(true);
         when(config.getString("usage-reporting.endpoint")).thenReturn("https://trace.danielstephenson.dev");
         when(config.getString("usage-reporting.key")).thenReturn("bundled-key");
 
@@ -71,7 +75,7 @@ class ConfigManagerTest {
 
     @Test
     void usageReporting_readsTheConfiguredValues() {
-        when(config.getBoolean("usage-reporting.enabled")).thenReturn(false);
+        when(config.get("usage-reporting.enabled")).thenReturn(false);
         when(config.getString("usage-reporting.endpoint")).thenReturn("http://localhost:8080");
         when(config.getString("usage-reporting.key")).thenReturn("abc");
 
@@ -162,5 +166,33 @@ class ConfigManagerTest {
 
         verify(plugin, never()).saveConfig();
         assertFalse(onDisk.isSet("usage-reporting"));
+    }
+
+    /**
+     * An operator who sets enabled: false by hand while the server runs, or writes it quoted, must
+     * find reporting off: the loaded config (still true, or "false" read by getBoolean() as the
+     * bundled true) must not win over config.yml on disk.
+     */
+    @Test
+    void usageReporting_isOffWhenConfigYmlOnDiskTurnsItOff(@TempDir Path dataFolder) throws Exception {
+        // getDataFolder() is final, so the field behind it is set on the mock.
+        java.lang.reflect.Field field = JavaPlugin.class.getDeclaredField("dataFolder");
+        field.setAccessible(true);
+        field.set(plugin, dataFolder.toFile());
+        when(plugin.getConfig()).thenReturn(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: true\n  endpoint: https://trace.danielstephenson.dev\n  key: bundled-key\n")));
+        assertTrue(configManager.isUsageReportingEnabled());
+
+        Files.write(dataFolder.resolve("config.yml"), "usage-reporting:\n  enabled: \"false\"\n".getBytes(StandardCharsets.UTF_8));
+
+        assertFalse(configManager.isUsageReportingEnabled());
+    }
+
+    @Test
+    void usageReporting_aQuotedFalseInTheLoadedConfigIsOff() {
+        when(plugin.getConfig()).thenReturn(YamlConfiguration.loadConfiguration(new StringReader(
+                "usage-reporting:\n  enabled: \"false\"\n  key: bundled-key\n")));
+
+        assertFalse(configManager.isUsageReportingEnabled());
     }
 }
