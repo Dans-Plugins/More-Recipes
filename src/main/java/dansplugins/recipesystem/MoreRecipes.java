@@ -8,6 +8,7 @@ import dansplugins.recipesystem.commands.ListCommand;
 import dansplugins.recipesystem.config.ConfigManager;
 import dansplugins.recipesystem.services.ItemStackService;
 import dansplugins.recipesystem.trace.TraceClient;
+import dansplugins.recipesystem.trace.UsageReportingSetting;
 import dansplugins.recipesystem.utils.RecipeRegistry;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,6 +17,7 @@ import preponderous.ponder.minecraft.bukkit.abs.AbstractPluginCommand;
 import preponderous.ponder.minecraft.bukkit.abs.PonderBukkitPlugin;
 import preponderous.ponder.minecraft.bukkit.services.CommandService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -75,6 +77,23 @@ public final class MoreRecipes extends PonderBukkitPlugin {
      */
     static String usageReportingOnNotice(String pluginName, String endpoint) {
         return "Usage reporting is on: " + pluginName + " sends its name, version and command names to " + endpoint + ", plus a random server ID (server-id in plugins/trace/config.yml) - nothing about players. Turn it off with usage-reporting.enabled: false in this plugin's config.yml, or for every plugin with enabled: false in plugins/trace/config.yml. Details: https://danielstephenson.dev/usage-reporting";
+    }
+
+    /**
+     * Writes the loaded config to {@code config.yml} without ever turning usage reporting back on.
+     * A {@code config.yml} Bukkit could not parse was loaded as empty, so saving would replace the
+     * operator's whole file (an opt-out included) with the bundled defaults: it is left alone. And the
+     * loaded config can be older than the file, since an operator may set
+     * {@code usage-reporting.enabled: false} by hand while the server runs, so an opt-out on disk is
+     * carried into it first. Every save goes through here, including the usage-reporting block
+     * written on upgrade.
+     */
+    @Override
+    public void saveConfig() {
+        if (!UsageReportingSetting.prepareToSave(getConfig(), new File(getDataFolder(), "config.yml"), getLogger())) {
+            return;
+        }
+        super.saveConfig();
     }
 
     @Override

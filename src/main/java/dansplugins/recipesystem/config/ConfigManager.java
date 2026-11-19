@@ -1,8 +1,11 @@
 package dansplugins.recipesystem.config;
 
+import dansplugins.recipesystem.trace.UsageReportingSetting;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.File;
 
 public class ConfigManager {
     private static final String USAGE_REPORTING_SECTION = "usage-reporting";
@@ -53,11 +56,21 @@ public class ConfigManager {
     // reporting off on every existing installation. Verified against
     // YamlConfiguration, not assumed.
 
-    /** False when the endpoint has been blanked, since events then have nowhere the operator chose to go. */
+    /**
+     * False when the endpoint has been blanked, since events then have nowhere the operator chose to go.
+     * Fails closed: only a value that clearly means "on" turns reporting on (getBoolean() would read a
+     * quoted "false" as the bundled true), and config.yml as it is on disk right now must allow it too,
+     * so neither a stale loaded copy nor Bukkit's fallback to the defaults for a file it could not
+     * parse can override an opt-out.
+     */
     public boolean isUsageReportingEnabled() {
         String endpoint = plugin.getConfig().getString(USAGE_REPORTING_ENDPOINT_KEY);
         boolean endpointBlanked = endpoint != null && endpoint.trim().isEmpty();
-        return plugin.getConfig().getBoolean(USAGE_REPORTING_ENABLED_KEY) && !endpointBlanked;
+        return UsageReportingSetting.isEnabled(plugin.getConfig(), configFile()) && !endpointBlanked;
+    }
+
+    private File configFile() {
+        return new File(plugin.getDataFolder(), "config.yml");
     }
 
     /** Never blank, because the trace client refuses a blank endpoint by throwing. */
