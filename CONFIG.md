@@ -9,7 +9,7 @@ registered is not configurable; the file only controls usage reporting.
 | `usage-reporting.endpoint` | `https://trace.danielstephenson.dev` | The trace server events are sent to. `""` means reporting is off regardless of `enabled`. |
 | `usage-reporting.key` | the plugin's key | Identifies this plugin to the trace server so reports are attributed to it. Not a secret: it ships in the default config and can only report as More-Recipes. `""` means reporting is off regardless of `enabled`. |
 
-A key left with no value at all (`endpoint:` with nothing after it) reads as its default, not as `""`, so reporting stays on.
+An `endpoint:` or `key:` left with no value at all (nothing after the colon) reads as its default, not as `""`, so reporting stays on. An `enabled:` left with no value does not: it counts as off.
 
 ## Usage reporting
 
@@ -26,7 +26,7 @@ a command another plugin runs as a player (`player.performCommand`, or `Bukkit.d
 the sender) is sent like one the player typed. Sending happens off the main thread, never delays a
 tick, and is dropped silently if the
 server cannot be reached. Set `usage-reporting.enabled` to `false` to turn it off. Only `true` (or
-`on`, `yes`) turns it on: any other value, including a quoted `"false"` or a typo, turns it off. Once
+`on`, `yes`, or a quoted `"1"`) turns it on: any other value, including a quoted `"false"` or a typo, turns it off. Once
 turned off it stays off: the plugin never writes `config.yml` back with reporting on, even if the file was
 edited while the server was running, and never overwrites a `config.yml` it cannot parse (it logs an
 error instead, and reporting stays off until the file is fixed).
